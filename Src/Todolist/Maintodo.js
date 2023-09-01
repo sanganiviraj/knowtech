@@ -75,7 +75,7 @@ const Maintodo = () => {
         <BottomSheet ref={ref => panelRef.current = ref}   
         // innerContentStyle={{backgroundColor:"#E7F2FF",width:windowWidth,marginLeft:-20}} 
         >
-            <Text style={{alignSelf:'center',fontSize:24,fontWeight:'600',color:'black'}}> Add Your Task </Text>
+            <Text style={{alignSelf:'center',fontSize:24,fontFamily:'Nunito-Bold',color:'black'}}> Add Your Task </Text>
 
             <View style={{marginTop:-20,flexDirection:'row',justifyContent:'space-around',height:200}}>
             <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)} placeholderTextColor='#2D2C2C' />
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
         //color:'black'
       },
       sectionTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 40,
+        fontFamily:'Dongle-Bold',
         color:'black'
       },
       items: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: (windowWidth*70)/100,
         color:'black',
-        elevation:5,
+        elevation:2,
         fontSize:18,
         color:'black',
         height:60,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation:5,
+        elevation:3,
         marginTop:40
     
       },

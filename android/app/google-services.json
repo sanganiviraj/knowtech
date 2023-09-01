@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "72525113987",
+    "project_id": "knowtech-e68ba",
+    "storage_bucket": "knowtech-e68ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72525113987:android:08948857df112fb53509b6",
+        "android_client_info": {
+          "package_name": "com.knowtech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72525113987-qpvc511slpb16fs2uo78hg44bhdc8mka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.knowtech",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "72525113987-jkmg36rmgc0btjc03l6mcrhkc40jdtad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjRskFBL_P4RFnz2mdMzdNnt1oASb13S0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72525113987-jkmg36rmgc0btjc03l6mcrhkc40jdtad.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

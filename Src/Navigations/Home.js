@@ -7,6 +7,13 @@ import {NavigationContainer } from '@react-navigation/native';
 import Bottomnavigation from './Bottomnavigation';
 import Icon, { Icons } from '../constant/Icons';
 import Popularscreen from '../extrascreens/Popularscreen';
+import Loginnavigation from './Loginnavigation';
+import ScreenTracker from './ScreenTracker';
+import Admin from '../Adminscreen/Topnavigation/Admin';
+import Freecourse from '../Courses/Freecourse';
+import Paidcourse from '../Courses/Paidcourse';
+import Resources from '../Courses/Resources';
+import Resourcepage from '../Pages/Resourcepage';
 
 
 const stack = createStackNavigator();
@@ -35,8 +42,8 @@ const Customdrawer = (props) => {
     >
       <ImageBackground source={require('../images/drawerbgm.png') }  style={{padding:10,}} >
           <Image source={{ uri:'https://thumbs.dreamstime.com/b/cute-man-face-cartoon-cute-man-face-cartoon-vector-illustration-graphic-design-135024353.jpg' }} style={{width:80,height:80,borderRadius:40,marginBottom:10}}/>
-          <Text style={{fontSize:20,fontWeight:700,color:'white'}}> Sangani Viraj</Text>
-          <Text style={{fontSize:15,fontWeight:500,color:'black',marginLeft:3,marginTop:5}}> Vsviraj60@gmail.com </Text>
+          <Text style={{fontSize:20,fontWeight:'700',color:'white'}}> Sangani Viraj</Text>
+          <Text style={{fontSize:15,fontWeight:'500',color:'black',marginLeft:3,marginTop:5}}> Vsviraj60@gmail.com </Text>
        </ImageBackground>
           <View style={{flex:1,paddingTop:10,backgroundColor:'white'}}/>
           <DrawerItemList {...props} />
@@ -77,6 +84,13 @@ const  Mydrawer = () => {
         )
       }}
       />
+      <drawer.Screen name="admin" component={Admin} 
+      options={{
+        drawerIcon : ({color}) => (
+          <Icon type={Icons.MaterialIcons} name='admin-panel-settings' size={30} color={color}/>
+        )
+      }}
+      />
 
     </drawer.Navigator>
   ) 
@@ -86,9 +100,19 @@ const Mainnavigation = () =>{
   return(
     <NavigationContainer>
       <stack.Navigator screenOptions={{headerShown:false}}>
+        {/* <stack.Screen name='loginnavigation' component={Loginnavigation}/> */}
         <stack.Screen name='mydrawer' component={Mydrawer} />
+        <stack.Screen name='admin' component={Admin } options={{
+              headerShown:true
+            }}/>
         <stack.Screen name='PopularScreen' component={Popularscreen} options={{headerShown:true}}/>
+        <stack.Screen name='freecourses' component={Freecourse} options={{headerShown:true}}/>
+        <stack.Screen name='paidCoures' component={Paidcourse} options={{headerShown:true}}/>
+        <stack.Screen name='resources' component={Resources} options={{headerShown:true}}/>
+
+        <stack.Screen name='resourcespage' component={Resourcepage} options={{headerShown:true}}/>
       </stack.Navigator>
+      {/* <ScreenTracker /> */}
     </NavigationContainer>
   )
 }

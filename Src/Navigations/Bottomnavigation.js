@@ -7,6 +7,7 @@ import Taskscreen from '../Screens/Taskscreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import * as Animatable from 'react-native-animatable';
 import Profilescreen from '../Screens/Profilescreen'
+import ScreenTracker from './ScreenTracker'
 
 const Stack = createBottomTabNavigator()
 
@@ -72,7 +73,7 @@ const Bottomnavigation = () => {
           )
         })
       }
-
+    
     </Stack.Navigator>
   )
 }

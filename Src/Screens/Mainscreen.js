@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import { windowWidth } from '../constant/extra'
 import Icon, { Icons } from '../constant/Icons'
 import { FlatList } from 'react-native-gesture-handler'
-import { Freecourses, PupularCourses } from '../Array/Coursearray'
+import { Freecourses, PupularCourses, resourcesdata } from '../Array/Coursearray'
 import { Image } from 'react-native-animatable'
 // import { TouchableOpacity } from 'react-native-gesture-handler'
 
@@ -16,7 +16,9 @@ const Mainscreen = ({navigation}) => {
         {/* <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text> */}
 
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ADD1FA',borderRadius:10}}>
+            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ADD1FA',borderRadius:10}} 
+            onPress={() => {navigation.navigate('paidCoures')}}
+            >
             <View style={styles.catelog}>
                 <View style={styles.minibox}>
                   <Icon type={Icons.MaterialIcons} name='attach-money' size={30} color='#286CF0'/>
@@ -26,7 +28,7 @@ const Mainscreen = ({navigation}) => {
             </View>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#CCB9E5',borderRadius:10}}>
+            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#CCB9E5',borderRadius:10}} onPress={()=>{navigation.navigate('resources')}}>
             <View style={styles.catelog}>
                 <View style={[styles.minibox,{backgroundColor: '#CCB9E5'}]}>
                   <Icon type={Icons.FontAwesome} name='list-ul' size={30} color='#884CE9'/>
@@ -50,7 +52,7 @@ const Mainscreen = ({navigation}) => {
             </TouchableOpacity>
 
 
-            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#A7CDA4',borderRadius:10}}>
+            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#A7CDA4',borderRadius:10}} onPress={() => {navigation.navigate('freecourses')}}>
             <View style={styles.catelog}>
                 <View style={[styles.minibox,{backgroundColor: '#A7CDA4'}]}>
                   <Icon type={Icons.Ionicons} name='download' size={30} color='#356823'/>
@@ -65,27 +67,31 @@ const Mainscreen = ({navigation}) => {
 
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
-          <Text style={{fontSize:24,fontWeight:'500',color:"black"}}> Popular Courses </Text>
+          <Text style={{fontSize:24,fontWeight:'500',color:"black",fontFamily:'Nunito-Bold'}}> Popular Courses </Text>
 
           <TouchableOpacity activeOpacity={0.5} onPress={()=> {navigation.navigate('PopularScreen')}}>
-          <Text style={{fontSize:20,fontWeight:'500',color:"grey"}}> See all </Text>
+          <Text style={{fontSize:20,fontFamily:'Nunito-Bold',color:"grey"}}> See all </Text>
           </TouchableOpacity>
         </View>
       </View>
 
         <View style={{height:260}}>
         <FlatList 
-        data={PupularCourses.slice(0,5)}
+        data={resourcesdata.slice(0,5)}
         horizontal
         renderItem={({item})=>{
-          // console.log(item.imgurl);
+          console.log(item);
           return(
+            <TouchableOpacity onPress={() => {navigation.navigate('resourcespage',{
+              rsdata : item
+            })}}>
             <View style={styles.pack}>
-                <Image style={styles.packimg} source={{uri:item.imgurl}}/>
+                <Image style={styles.packimg} source={{uri:item.url}}/>
                 <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.course} </Text>
                 <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.descriptionOneLine} </Text>
                 <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.price} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text>
             </View> 
+            </TouchableOpacity>
           )
         }}
         />
@@ -93,7 +99,7 @@ const Mainscreen = ({navigation}) => {
 
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
-          <Text style={{fontSize:24,fontWeight:'500',color:"black"}}> Favorite Courses </Text>
+          <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Favorite Courses </Text>
         </View>
       </View>
       
@@ -138,7 +144,7 @@ const styles = StyleSheet.create({
   title:{
     fontSize:22,
     color:'#286CF0',
-    fontWeight:'500',
+    fontFamily:'Roboto-Bold',
     marginLeft:2
   },
   pack:{

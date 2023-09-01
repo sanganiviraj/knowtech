@@ -3,12 +3,17 @@ import React from 'react'
 
 const Profilescreen = () => {
   return (
-    <View>
-      <Text>Profilescreen</Text>
+    <View style={styles.screen}>
+      
     </View>
   )
 }
 
 export default Profilescreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  screen:{
+    flex:1,
+    backgroundColor:'white'
+  }
+})

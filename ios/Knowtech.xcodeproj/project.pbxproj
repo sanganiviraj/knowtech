@@ -14,6 +14,26 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-Knowtech-KnowtechTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Knowtech-KnowtechTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		92FBA6BC007D47E49CD175C0 /* Jost-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C0B636426E24443824A30CD /* Jost-Italic-VariableFont_wght.ttf */; };
+		D7FADF7B77E84F85937519E3 /* Jost-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13262107CD1C456BB7591096 /* Jost-VariableFont_wght.ttf */; };
+		7CE77CFB7A664BFD8EC6DD59 /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E82F1D35C8E6428587AAAF55 /* Nunito-Italic-VariableFont_wght.ttf */; };
+		7D8A28B17C504099897FCB9D /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB83CE382F2E4679B2E01C51 /* Nunito-VariableFont_wght.ttf */; };
+		27069B47C9B447A2A067FAF3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E732B4A841864C9384C1E9D4 /* Roboto-Bold.ttf */; };
+		8B2818EEDE5041A7A907EA49 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D75E494D035419EB1B86133 /* Roboto-Medium.ttf */; };
+		7DE535ECE5D34CCCB0E1D58D /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC2424E2526F463CAEA18FD7 /* Ubuntu-Bold.ttf */; };
+		F1CCAF8960854712A327B175 /* Dongle-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66F72F1D145648C9BA1CD453 /* Dongle-Bold.ttf */; };
+		34BA5CB20B484D9C9C840930 /* Dongle-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05D6F431279C4E0384C3F0E5 /* Dongle-Light.ttf */; };
+		62A7DC0D324547A7B18CA7D8 /* Dongle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E7658EA43A94B57A26CFAF9 /* Dongle-Regular.ttf */; };
+		0F898B6BB2274BC9A166EF97 /* Arima-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16D225C4F2E14FFD8110EF5D /* Arima-VariableFont_wght.ttf */; };
+		208F9A911B17480CB417DF81 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAFE85D229C464A9644A018 /* Pacifico-Regular.ttf */; };
+		77663DBA1DDA4A7CBF934E8E /* Arima-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA8E013824224A599A2F4C2C /* Arima-Bold.ttf */; };
+		2C44046918004F669255C2D0 /* Arima-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4889E69924F34326B3C51BD8 /* Arima-SemiBold.ttf */; };
+		33E7DB31459140AC9A4D046D /* Jost-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F23065F6EBAF4633B58D98FE /* Jost-ExtraBold.ttf */; };
+		57D782D391514D19B83852DB /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F493FF5E3F45359A7047F1 /* Jost-Medium.ttf */; };
+		D98D55A8817E495EA793BCD2 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E8C473B5B594A9CB0C0395D /* Jost-SemiBold.ttf */; };
+		CEB099F3BD294D84A8FCAB80 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A417793B035340729B483525 /* Nunito-Bold.ttf */; };
+		0303B9450CEE42B6A85001A8 /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C29DFA2D176042F69AC4D5DA /* Nunito-Medium.ttf */; };
+		DBC63421247A44A8A9569BFD /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D01B2BFEEECD48ACBF271DAD /* Nunito-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +64,26 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Knowtech/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Knowtech-KnowtechTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Knowtech-KnowtechTests.release.xcconfig"; path = "Target Support Files/Pods-Knowtech-KnowtechTests/Pods-Knowtech-KnowtechTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7C0B636426E24443824A30CD /* Jost-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Jost-Italic-VariableFont_wght.ttf"; path = "../Src/assets/fonst/Jost-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		13262107CD1C456BB7591096 /* Jost-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Jost-VariableFont_wght.ttf"; path = "../Src/assets/fonst/Jost-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E82F1D35C8E6428587AAAF55 /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Nunito-Italic-VariableFont_wght.ttf"; path = "../Src/assets/fonst/Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AB83CE382F2E4679B2E01C51 /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Nunito-VariableFont_wght.ttf"; path = "../Src/assets/fonst/Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E732B4A841864C9384C1E9D4 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; name = "Roboto-Bold.ttf"; path = "../Src/assets/fonst/Roboto-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D75E494D035419EB1B86133 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; name = "Roboto-Medium.ttf"; path = "../Src/assets/fonst/Roboto-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DC2424E2526F463CAEA18FD7 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Bold.ttf"; path = "../Src/assets/fonst/Ubuntu-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		66F72F1D145648C9BA1CD453 /* Dongle-Bold.ttf */ = {isa = PBXFileReference; name = "Dongle-Bold.ttf"; path = "../Src/assets/fonst/Dongle-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		05D6F431279C4E0384C3F0E5 /* Dongle-Light.ttf */ = {isa = PBXFileReference; name = "Dongle-Light.ttf"; path = "../Src/assets/fonst/Dongle-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0E7658EA43A94B57A26CFAF9 /* Dongle-Regular.ttf */ = {isa = PBXFileReference; name = "Dongle-Regular.ttf"; path = "../Src/assets/fonst/Dongle-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		16D225C4F2E14FFD8110EF5D /* Arima-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Arima-VariableFont_wght.ttf"; path = "../Src/assets/fonst/Arima-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4CAFE85D229C464A9644A018 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; name = "Pacifico-Regular.ttf"; path = "../Src/assets/fonst/Pacifico-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA8E013824224A599A2F4C2C /* Arima-Bold.ttf */ = {isa = PBXFileReference; name = "Arima-Bold.ttf"; path = "../Src/assets/fonst/Arima-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4889E69924F34326B3C51BD8 /* Arima-SemiBold.ttf */ = {isa = PBXFileReference; name = "Arima-SemiBold.ttf"; path = "../Src/assets/fonst/Arima-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F23065F6EBAF4633B58D98FE /* Jost-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Jost-ExtraBold.ttf"; path = "../Src/assets/fonst/Jost-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F4F493FF5E3F45359A7047F1 /* Jost-Medium.ttf */ = {isa = PBXFileReference; name = "Jost-Medium.ttf"; path = "../Src/assets/fonst/Jost-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8E8C473B5B594A9CB0C0395D /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; name = "Jost-SemiBold.ttf"; path = "../Src/assets/fonst/Jost-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A417793B035340729B483525 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; name = "Nunito-Bold.ttf"; path = "../Src/assets/fonst/Nunito-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C29DFA2D176042F69AC4D5DA /* Nunito-Medium.ttf */ = {isa = PBXFileReference; name = "Nunito-Medium.ttf"; path = "../Src/assets/fonst/Nunito-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D01B2BFEEECD48ACBF271DAD /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; name = "Nunito-SemiBold.ttf"; path = "../Src/assets/fonst/Nunito-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +162,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				5B52F154C39343FDAC4D419F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +188,34 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		5B52F154C39343FDAC4D419F /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				7C0B636426E24443824A30CD /* Jost-Italic-VariableFont_wght.ttf */,
+				13262107CD1C456BB7591096 /* Jost-VariableFont_wght.ttf */,
+				E82F1D35C8E6428587AAAF55 /* Nunito-Italic-VariableFont_wght.ttf */,
+				AB83CE382F2E4679B2E01C51 /* Nunito-VariableFont_wght.ttf */,
+				E732B4A841864C9384C1E9D4 /* Roboto-Bold.ttf */,
+				6D75E494D035419EB1B86133 /* Roboto-Medium.ttf */,
+				DC2424E2526F463CAEA18FD7 /* Ubuntu-Bold.ttf */,
+				66F72F1D145648C9BA1CD453 /* Dongle-Bold.ttf */,
+				05D6F431279C4E0384C3F0E5 /* Dongle-Light.ttf */,
+				0E7658EA43A94B57A26CFAF9 /* Dongle-Regular.ttf */,
+				16D225C4F2E14FFD8110EF5D /* Arima-VariableFont_wght.ttf */,
+				4CAFE85D229C464A9644A018 /* Pacifico-Regular.ttf */,
+				CA8E013824224A599A2F4C2C /* Arima-Bold.ttf */,
+				4889E69924F34326B3C51BD8 /* Arima-SemiBold.ttf */,
+				F23065F6EBAF4633B58D98FE /* Jost-ExtraBold.ttf */,
+				F4F493FF5E3F45359A7047F1 /* Jost-Medium.ttf */,
+				8E8C473B5B594A9CB0C0395D /* Jost-SemiBold.ttf */,
+				A417793B035340729B483525 /* Nunito-Bold.ttf */,
+				C29DFA2D176042F69AC4D5DA /* Nunito-Medium.ttf */,
+				D01B2BFEEECD48ACBF271DAD /* Nunito-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +313,26 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				92FBA6BC007D47E49CD175C0 /* Jost-Italic-VariableFont_wght.ttf in Resources */,
+				D7FADF7B77E84F85937519E3 /* Jost-VariableFont_wght.ttf in Resources */,
+				7CE77CFB7A664BFD8EC6DD59 /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
+				7D8A28B17C504099897FCB9D /* Nunito-VariableFont_wght.ttf in Resources */,
+				27069B47C9B447A2A067FAF3 /* Roboto-Bold.ttf in Resources */,
+				8B2818EEDE5041A7A907EA49 /* Roboto-Medium.ttf in Resources */,
+				7DE535ECE5D34CCCB0E1D58D /* Ubuntu-Bold.ttf in Resources */,
+				F1CCAF8960854712A327B175 /* Dongle-Bold.ttf in Resources */,
+				34BA5CB20B484D9C9C840930 /* Dongle-Light.ttf in Resources */,
+				62A7DC0D324547A7B18CA7D8 /* Dongle-Regular.ttf in Resources */,
+				0F898B6BB2274BC9A166EF97 /* Arima-VariableFont_wght.ttf in Resources */,
+				208F9A911B17480CB417DF81 /* Pacifico-Regular.ttf in Resources */,
+				77663DBA1DDA4A7CBF934E8E /* Arima-Bold.ttf in Resources */,
+				2C44046918004F669255C2D0 /* Arima-SemiBold.ttf in Resources */,
+				33E7DB31459140AC9A4D046D /* Jost-ExtraBold.ttf in Resources */,
+				57D782D391514D19B83852DB /* Jost-Medium.ttf in Resources */,
+				D98D55A8817E495EA793BCD2 /* Jost-SemiBold.ttf in Resources */,
+				CEB099F3BD294D84A8FCAB80 /* Nunito-Bold.ttf in Resources */,
+				0303B9450CEE42B6A85001A8 /* Nunito-Medium.ttf in Resources */,
+				DBC63421247A44A8A9569BFD /* Nunito-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

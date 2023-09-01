@@ -1,0 +1,85 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "Src/assets/fonst/Arima-Bold.ttf",
+      "sha1": "9ffd73198749689ae1f5b8bfedddec611d9e7a81"
+    },
+    {
+      "path": "Src/assets/fonst/Arima-SemiBold.ttf",
+      "sha1": "089d8e938860291d8b3645be74f74995f286908f"
+    },
+    {
+      "path": "Src/assets/fonst/Arima-VariableFont_wght.ttf",
+      "sha1": "7676d7dc122baedc477f231c0bec2f4fb69ee3d5"
+    },
+    {
+      "path": "Src/assets/fonst/Dongle-Bold.ttf",
+      "sha1": "75fcc4437ae92bd5b3f0c064fc9891a3bc2aba67"
+    },
+    {
+      "path": "Src/assets/fonst/Dongle-Light.ttf",
+      "sha1": "6e627ff8bf24d576b66548bc2652aee816d99ac4"
+    },
+    {
+      "path": "Src/assets/fonst/Dongle-Regular.ttf",
+      "sha1": "740c531d37fda2172f86e397855eb18a6b1b5825"
+    },
+    {
+      "path": "Src/assets/fonst/Jost-ExtraBold.ttf",
+      "sha1": "87f508a395ce233b60598404f9cc3a744453ed09"
+    },
+    {
+      "path": "Src/assets/fonst/Jost-Italic-VariableFont_wght.ttf",
+      "sha1": "5ca6fe5c5454e6f01c8b84c4c02c80bd2b045b5d"
+    },
+    {
+      "path": "Src/assets/fonst/Jost-Medium.ttf",
+      "sha1": "7e9d55841807a5eeb3ba6a1dfb0607b8a72742c7"
+    },
+    {
+      "path": "Src/assets/fonst/Jost-SemiBold.ttf",
+      "sha1": "04165a9fe78bef66820e3c57dd19cb9b40bcbd88"
+    },
+    {
+      "path": "Src/assets/fonst/Jost-VariableFont_wght.ttf",
+      "sha1": "373a7877acf630c667421684e83f03c66a7587e0"
+    },
+    {
+      "path": "Src/assets/fonst/Nunito-Bold.ttf",
+      "sha1": "dea5eec0aca2aef62e3bfc625cf95f9d45b59687"
+    },
+    {
+      "path": "Src/assets/fonst/Nunito-Italic-VariableFont_wght.ttf",
+      "sha1": "e1ffb7a3b1b490519cdcc9672a520ae2b2c128e9"
+    },
+    {
+      "path": "Src/assets/fonst/Nunito-Medium.ttf",
+      "sha1": "0e3a9789daa6603bf6870c124727c3643b56574a"
+    },
+    {
+      "path": "Src/assets/fonst/Nunito-SemiBold.ttf",
+      "sha1": "876165d70aa2e00f66737c7dd87039e2619bf2c2"
+    },
+    {
+      "path": "Src/assets/fonst/Nunito-VariableFont_wght.ttf",
+      "sha1": "1f12fa4912fbe968c91818beb7b7b6399e97e87f"
+    },
+    {
+      "path": "Src/assets/fonst/Pacifico-Regular.ttf",
+      "sha1": "baca1fca7fe74b61cb33aa0da48ec1a3a77bcf49"
+    },
+    {
+      "path": "Src/assets/fonst/Roboto-Bold.ttf",
+      "sha1": "0ce37ced9c5fcac9bdc452a432c1258870ba4677"
+    },
+    {
+      "path": "Src/assets/fonst/Roboto-Medium.ttf",
+      "sha1": "5f16f4d6dbb4a4f12d8ae96488ac209bb49762a5"
+    },
+    {
+      "path": "Src/assets/fonst/Ubuntu-Bold.ttf",
+      "sha1": "020aaec9cdeb59aa8ebd2e4c693527cddb2d1577"
+    }
+  ]
+}
