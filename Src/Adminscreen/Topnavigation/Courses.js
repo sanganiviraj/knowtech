@@ -21,6 +21,7 @@ const Courses = () => {
   const[checked,setchecked] = useState('Paid');
   const[courseimage,setcouresimage]=useState(null);
   const[price,setprice]=useState(0);
+  const[urllink,seturllink]=useState('');
   const[time,settime]=useState('');
 
   
@@ -32,6 +33,7 @@ const Courses = () => {
     setcouresimage(null)
     setprice(0)
     settime('')
+    seturllink('')
   },[])
 
 
@@ -161,7 +163,8 @@ const Courses = () => {
       det : detail,
       img: url,
       Prc : price,
-      tm : time
+      tm : time,
+      url: urllink
       
       
     })
@@ -244,6 +247,23 @@ const Courses = () => {
      activeUnderlineColor='#1F4EA9'
      onChangeText={text => settime(text)}
      value={time}
+    />
+    
+    </View>
+
+    <View style={{flexDirection:'row',alignItems:"center"}}>
+    <Image style={{width:24,height:24,marginRight:20}} source={require('../Topnavigation/link.png')}/>
+
+    <TextInput 
+      style={{marginVertical:10,width:(windowWidth*80)/100,backgroundColor:'#E7F2FF',elevation:1}}
+     label="Url"
+     placeholder='Enter Download Url'
+     underlineColor='#1F4EA9'
+     outlineColor='#1F4EA9'
+     activeOutlineColor='#1F4EA9'
+     activeUnderlineColor='#1F4EA9'
+     onChangeText={text => seturllink(text)}
+     value={urllink}
     />
     
     </View>

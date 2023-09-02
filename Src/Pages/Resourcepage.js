@@ -39,9 +39,16 @@ const Resourcepage = ({route}) => {
                 return( 
                     <TouchableOpacity activeOpacity={0.5} onPress={() => {setcurrentindex(index === currentindex ? null : index)}}>
                     <View style={styles.box}>
+                        <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10}}>
                         <Text style={{fontSize:20,color:'black',fontFamily:'Roboto-Bold'}}>
                             {item.category}
                         </Text>
+
+                        {index==currentindex ? <Icon type={Icons.AntDesign} name="up" size={26} color="black" /> :
+                        <Icon type={Icons.AntDesign} name="down" size={26} color="black" />
+                        }
+
+                        </View>
 
                         {index == currentindex && <View>
                         {item.subcategory.map((subc) =>{

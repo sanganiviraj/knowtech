@@ -1,13 +1,23 @@
 export const Bookarray = [
     {
-        name:"C, C++, Java, Python, PHP, JavaScript and Linux For Beginners",
-        desc:"Python, Java, JavaScript, C, C++, CSS, Data Science, HTML, LINUX and PHP. It can be challenging to understand the programming language's distinctive advantages and charms.",
-        url:"https://www.obooko.com/images-cache/c-c++-java-python-php-javaScript-linux-for-beginners-obooko-ebook-1d8f0e136e158e7dd9c5e323623fc577.jpg"
+        name:"Python Network",
+        desc:"Learning Python Network Programming Free PDF Books PDF Book",
+        url:"https://freepdf-books.com/doc-images/2020.png"
     },
     {
-        name:"C, C++, Java, Python, PHP, JavaScript and Linux For Beginners",
-        desc:"Python, Java, JavaScript, C, C++, CSS, Data Science, HTML, LINUX and PHP. It can be challenging to understand the programming language's distinctive advantages and charms.",
-        url:"https://www.obooko.com/images-cache/c-c++-java-python-php-javaScript-linux-for-beginners-obooko-ebook-1d8f0e136e158e7dd9c5e323623fc577.jpg"
+        name:"Black Hat SEO",
+        desc:"Leeching From Authority Sites Secrets To Fast Rankings And Big Money, Pdf Free Download PDF Book",
+        url:"https://freepdf-books.com/doc-images/5543.png"
+    },
+    {
+        name:"Drupal 6 Theming",
+        desc:"Drupal 6 Theming Cookbook, Pdf Free Download PDF Book",
+        url:"https://freepdf-books.com/doc-images/208.png"
+    },
+    {
+        name:"Dreamweaver Cs5.5 ",
+        desc:"Dreamweaver Cs5.5 Mobile And Web Development With HTML5 CSS3 And JQuery, Pdf Free Download PDF Book",
+        url:"https://freepdf-books.com/doc-images/189.png"
     }
 
 ]

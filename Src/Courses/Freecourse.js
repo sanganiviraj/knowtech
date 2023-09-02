@@ -60,7 +60,7 @@ const Freecourse = () => {
                 {item.data.name}
               </Text>
 
-              <Text style={{fontSize:16,fontFamily:"Roboto-Medium",color:'#274971',}}>
+              <Text numberOfLines={2} style={{fontSize:16,fontFamily:"Roboto-Medium",color:'#274971',}}>
                 {item.data.desc}
               </Text>
 
@@ -69,7 +69,7 @@ const Freecourse = () => {
               </Text>
 
               
-              <Text style={{fontSize:15,fontFamily:"Roboto-Medium",color:'#274971',alignSelf:'flex-end'}}>
+              <Text style={{fontSize:12,fontFamily:"Roboto-Medium",color:'grey',alignSelf:'flex-end'}}>
                 {item.data.tm}
               </Text>
 

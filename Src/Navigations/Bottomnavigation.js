@@ -55,8 +55,8 @@ const Bottomnavigation = () => {
         borderRadius:16,
         elevation:10,
         shadowColor: 'black',
-        
-      }
+        tabBarHideOnKeyboard : true
+    }
     }}
     >
 
@@ -67,6 +67,7 @@ const Bottomnavigation = () => {
             options={{
               tabBarShowLabel:false,
               headerShown:item.header,
+              tabBarHideOnKeyboard:true,
               tabBarButton : (props) => <Tabbarbutton {...props} item={item} />
             }}
             />

@@ -77,7 +77,7 @@ const Maintodo = () => {
         >
             <Text style={{alignSelf:'center',fontSize:24,fontFamily:'Nunito-Bold',color:'black'}}> Add Your Task </Text>
 
-            <View style={{marginTop:-20,flexDirection:'row',justifyContent:'space-around',height:200}}>
+            <View style={{marginTop:-20,flexDirection:'row',justifyContent:'space-around',height:150}}>
             <TextInput style={styles.input} placeholder={'Write a task'} value={task} onChangeText={text => setTask(text)} placeholderTextColor='#2D2C2C' />
             <TouchableOpacity onPress={() => handleAddTask()}>
                 <View style={styles.addWrapper}>
@@ -85,7 +85,10 @@ const Maintodo = () => {
                 </View>
             </TouchableOpacity>
             </View>
-           
+
+             <Text style={{color:'black',fontSize:14,textAlign:'center',fontFamily:'Jost-SemiBold'}}>"One way businesses become more efficient is when technology allows employees to simplify tasks"</Text>
+             <View style={{height:20}}></View>
+            
             
       </BottomSheet>
         

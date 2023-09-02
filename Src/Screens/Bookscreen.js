@@ -17,9 +17,12 @@ const Bookscreen = () => {
            <View style={styles.box}>
            
               <View style={styles.minibox}>
-                 
+              <Text style={{fontSize:17,fontFamily:"Roboto-Bold",textAlign:'center',color:'black',marginBottom:5}}> {item.name}</Text>
               </View> 
+           
               <Image style={styles.img} source={{uri: item.url}}/>
+        
+              
            </View> 
             
           )
@@ -40,25 +43,30 @@ const styles = StyleSheet.create({
   box:{
     backgroundColor:"white",
     width:(windowWidth*45)/100,
-    height:200,
+    height:220,
     borderRadius:10,
     alignSelf:'center',
     marginHorizontal:10,
-    marginVertical:10
+    marginVertical:20,
+    
   },
   minibox:{
-    backgroundColor:"#ffd6ff",
+    backgroundColor:"#b4d6ff",
     width:(windowWidth*45)/100,
-    height:150,
+    height:180,
     borderRadius:10,
-    marginTop:50
+    marginTop:50,
+    justifyContent:'flex-end',
+    
   },
   img:{
-    width:(windowWidth*35)/100,
-    height:20 0,
+    width:(windowWidth*33)/100,
+    height:190,
     position:'absolute',
-    alignSelf:'center'
+    alignSelf:'center',
+    borderRadius:5,
     
     
-  }
+  },
+  
 })
