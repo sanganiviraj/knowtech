@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,Image,TouchableOpacity,ScrollView } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { TextInput } from 'react-native-paper'
 import { windowWidth } from '../../constant/extra'
@@ -6,7 +6,7 @@ import Icon, { Icons } from '../../constant/Icons'
 import { RadioButton } from 'react-native-paper';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { PermissionsAndroid } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 
@@ -55,13 +55,6 @@ const Courses = () => {
    } else if (response.error) {
      console.log('ImagePicker Error: ', response.error);
    } 
-  //  else if (response.customButton) {
-  //    console.log(
-  //      'User tapped custom button: ',
-  //      response.customButton
-  //    );
-    //  alert(response.customButton);
-  //  } 
    else {
      setcouresimage(response);
    }
@@ -71,53 +64,53 @@ const Courses = () => {
   console.log('====================================');
   console.log(error);
   console.log('====================================');
-}
+ }
 
  }
 
 
 
-  const requestCameraPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'Cool Photo App Camera Permission',
-          message:
-            'Cool Photo App needs access to your camera ' +
-            'so you can take awesome pictures.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the camera');
-        opengallery()
-      } else {
-        console.log('Camera permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-      // setImmediate(result)
-    }
-  };
+  // const requestCameraPermission = async () => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.CAMERA,
+  //       {
+  //         title: 'Cool Photo App Camera Permission',
+  //         message:
+  //           'Cool Photo App needs access to your camera ' +
+  //           'so you can take awesome pictures.',
+  //         buttonNeutral: 'Ask Me Later',
+  //         buttonNegative: 'Cancel',
+  //         buttonPositive: 'OK',
+  //       },
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       console.log('You can use the camera');
+  //       opengallery()
+  //     } else {
+  //       console.log('Camera permission denied');
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //     // setImmediate(result)
+  //   }
+  // };
 
-  const opengallery = async() =>{
-    try{
-      const final = await launchImageLibrary({mediaType:'photo'})
-      if(final.didCancel){
-        console.log('cancel')
-      }else{
-        console.log('++++++++++++++++++++++++++');
-        console.log(final);
-        console.log('====================================');
-        setcouresimage(final)
-      }
-    }catch(error){
-      console.log('Not selected image properly')
-    }
-  }
+  // const opengallery = async() =>{
+  //   try{
+  //     const final = await launchImageLibrary({mediaType:'photo'})
+  //     if(final.didCancel){
+  //       console.log('cancel')
+  //     }else{
+  //       console.log('++++++++++++++++++++++++++');
+  //       console.log(final);
+  //       console.log('====================================');
+  //       setcouresimage(final)
+  //     }
+  //   }catch(error){
+  //     console.log('Not selected image properly')
+  //   }
+  // }
 
   const uploadimage =async()=>{
 
@@ -149,12 +142,6 @@ const Courses = () => {
 
   const uploaditems = (url) => {
     console.log('enter');
-    // if(price=='0'){
-    //   setprice('Free')
-    //   console.log('price set')
-    // }else{
-    //   console.log('ok,done')
-    // }
     firestore()
     .collection('Courses')
     .add({
@@ -178,8 +165,12 @@ const Courses = () => {
   return (
     <ScrollView>
     <View style={styles.screen}>
+
+      
     
     <View style={{marginTop:30,width:(windowWidth*90)/100}}/>
+
+    <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:'black',marginLeft:-5}}> Enter Course Detail</Text>
 
     <View style={{flexDirection:'row',alignItems:"center"}}>
     <Image style={{width:24,height:24,marginRight:20}} source={require('../Topnavigation/online-course.png')}/>

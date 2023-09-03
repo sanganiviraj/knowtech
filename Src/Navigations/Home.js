@@ -14,10 +14,14 @@ import Freecourse from '../Courses/Freecourse';
 import Paidcourse from '../Courses/Paidcourse';
 import Resources from '../Courses/Resources';
 import Resourcepage from '../Pages/Resourcepage';
+import { createStore } from 'redux';
+import allreducer from '../Redux/Combinerreducers';
+import { Provider } from 'react-redux'
 
 
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
+const Stores = createStore(allreducer);
 
 function Feed() {
   return (
@@ -122,8 +126,9 @@ const Mainnavigation = () =>{
 
 const Home = () => {
   return (
+    <Provider store={Stores}>
     <Mainnavigation />
-    // <View style={{backgroundColor:'pink',flex:1}}></View>
+    </Provider>
   )
 }
 

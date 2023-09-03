@@ -1,16 +1,72 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React,{useState} from 'react'
+import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native'
+import React,{useState,useEffect} from 'react'
 import { windowWidth } from '../constant/extra'
 import Icon, { Icons } from '../constant/Icons'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { Freecourses, PupularCourses, resourcesdata } from '../Array/Coursearray'
-import { Image } from 'react-native-animatable'
-// import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { Image } from 'react-native-animatable';
+import firestore from '@react-native-firebase/firestore';
+import { useDispatch,useSelector } from 'react-redux'
+import { ADD_FAV, Delete_fav } from '../Redux/Actions'
+
 
 const Mainscreen = ({navigation}) => {
   const [selectedButton,setslectebutton]=useState();
 
+  const [courseitem,setcourseitem] = useState([]);
+  const dispatch = useDispatch();
+
+  const coursedata = useSelector(state => state.favreducer.favoritedata);
+  
+
+  useEffect(() => {
+    getitem()
+  },[])
+
+  const getitem = () => {
+    firestore()
+    .collection('Courses')
+    .get()
+    .then(querySnapshot => {
+      console.log('Total users: ', querySnapshot.size);
+      let tempdata = [];
+
+      querySnapshot.forEach(documentSnapshot => {
+        // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+
+        tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+      });
+      setcourseitem(tempdata)
+  });
+}
+
+
+  const Additem = (index) =>{
+    console.log('************')
+    console.log(coursedata);
+    
+    if(!coursedata.includes(index)) {
+      console.log(coursedata!==index)
+      console.log(index)
+      dispatch(ADD_FAV(index))
+    }else{
+      dispatch(Delete_fav(index))
+      console.log(index)
+      console.log('delete')
+    }
+
+  }
+
+  
+  console.log('++++++++++++++++++++++++++++++++++++');
+  console.log(coursedata);
+  console.log('====================================');
+
+  const items = coursedata.map((index) =>courseitem[index])
+  console.log(items)
+
   return (
+    <ScrollView>
     <View style={styles.screen}>
       <View style={styles.box}>
         {/* <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text> */}
@@ -34,7 +90,7 @@ const Mainscreen = ({navigation}) => {
                   <Icon type={Icons.FontAwesome} name='list-ul' size={30} color='#884CE9'/>
                 </View>
 
-                <Text style={[styles.title,{color:"#884CE9"}]}> Resources  </Text>
+                <Text style={[styles.title,{color:"#884CE9"}]}> Resource  </Text>
             </View>
             </TouchableOpacity>
         </View>
@@ -76,20 +132,30 @@ const Mainscreen = ({navigation}) => {
       </View>
 
         <View style={{height:260}}>
+
         <FlatList 
-        data={resourcesdata.slice(0,5)}
+        data={courseitem.slice(0,8)}
         horizontal
-        renderItem={({item})=>{
-          console.log(item);
+        renderItem={({item,index})=>{
+          // console.log(item);
           return(
-            <TouchableOpacity onPress={() => {navigation.navigate('resourcespage',{
-              rsdata : item
-            })}}>
+            <TouchableOpacity onPress={() => {}}>
             <View style={styles.pack}>
-                <Image style={styles.packimg} source={{uri:item.url}}/>
-                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.course} </Text>
-                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.descriptionOneLine} </Text>
-                <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.price} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text>
+                <Image style={styles.packimg} source={{uri:item.data.img}}/>
+                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
+                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                { 
+                  item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+                    <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
+                }
+
+                <TouchableOpacity onPress={() => Additem(index)}>
+                <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+                </TouchableOpacity>
+                </View>
+
             </View> 
             </TouchableOpacity>
           )
@@ -103,7 +169,50 @@ const Mainscreen = ({navigation}) => {
         </View>
       </View>
       
+     <View style={{height:260}}>
+
+       <FlatList 
+        data={items.slice(0,8)}
+        horizontal
+        renderItem={({item,index})=>{
+          // console.log(item);
+          return(
+            <TouchableOpacity onPress={() => {}}>
+            <View style={styles.pack}>
+                <Image style={styles.packimg} source={{uri:item.data.img}}/>
+                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
+                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                { 
+                  item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+                    <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
+                }
+
+                <TouchableOpacity onPress={() => Additem(index)}>
+                <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+                </TouchableOpacity>
+                </View>
+
+            </View> 
+            </TouchableOpacity>
+          )
+        }}
+        />
+        </View> 
+
+        <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
+            <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Books </Text>
+          </View>
+        </View>
+
+        <View style={{height:100}}/>
+
     </View>
+    </ScrollView>
+
+    
   )
 }
 
