@@ -115,6 +115,7 @@ const Mainnavigation = () =>{
         <stack.Screen name='resources' component={Resources} options={{headerShown:true}}/>
 
         <stack.Screen name='resourcespage' component={Resourcepage} options={{headerShown:true}}/>
+        
       </stack.Navigator>
       {/* <ScreenTracker /> */}
     </NavigationContainer>
