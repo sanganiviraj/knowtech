@@ -1,4 +1,4 @@
-import { Fav_course,FavDelete_course } from "./Actions";
+import { Fav_course,FavDelete_course, Update_fav, update_fav } from "./Actions";
 
 const initialstate = {
     favoritedata:[]
@@ -21,6 +21,14 @@ const favreducer = (state=initialstate,action) => {
             return{
                 ...state,
                 favoritedata : state.favoritedata.filter(list => list !== index),
+            }
+        }
+        case Update_fav :{
+            console.log('its work')
+            const {removefav} = action.favoritelist;
+            return{
+                ...state,
+                favoritedata : removefav,
             }
         }
 

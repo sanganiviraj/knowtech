@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity,Image,Modal,Pressable } from 'react-native'
 import React, { useState,useEffect } from 'react'
 import { windowWidth } from '../../constant/extra';
 import Icon, { Icons } from '../../constant/Icons';
@@ -8,6 +8,8 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { PermissionsAndroid } from 'react-native';
+import { BlurView } from '@react-native-community/blur';
+import { ToastAndroid } from 'react-native';
 
 const Books = () => {
   const [bookname,setbookname]=useState('');
@@ -15,6 +17,8 @@ const Books = () => {
   const [bookdetail,setbookdetail]=useState('');
   const [bookurl,setbookurl] = useState('');
   const [bookimage,setbookimage]=useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [pass,setpass]=useState('');
 
   useEffect(()=>{
     setbookdesc('');
@@ -22,6 +26,7 @@ const Books = () => {
     setbookimage(null);
     setbookurl('');
     setbookname('')
+    setModalVisible(true)
   },[])
 
   var options = {
@@ -97,11 +102,68 @@ const Books = () => {
     });
   }
 
+ const _onhandleenter= () => {
+
+  if(pass === "9181"){
+    setModalVisible(!modalVisible)
+  }else{
+    ToastAndroid.show('Enter Valid Password !', ToastAndroid.SHORT);
+  }
+  
+ }
+
   return (
     <ScrollView>
     <View style={styles.screen}>
     
-    
+    <Modal
+        animationType="slide"
+        transparent={true}
+        
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+       
+        <View style={styles.modalview}>
+        <BlurView
+          style={{ flex: 1,justifyContent:'center',position:'absolute',alignSelf:'center',alignItems:'center' }}
+          // blurType="light" // You can change the blur type as per your preference
+          blurAmount={50}  
+          // You can adjust the blur amount
+        >
+          <View style={styles.modalbox}>
+          
+            <Text style={{fontSize:18,color:'black',alignSelf:'center'}}>Enter Admin Password!</Text>
+
+            <TextInput 
+              style={{height:40,marginVertical:5,elevation:1}}
+              placeholder='****'
+              maxLength={4}
+              value={pass}
+              onChangeText={text => setpass(text)}
+              underlineColor='#1F4EA9'
+              outlineColor='#1F4EA9'
+              activeOutlineColor='#1F4EA9'
+              activeUnderlineColor='#1F4EA9'
+              secureTextEntry={true}
+              keyboardType='numeric'
+            />
+
+            <Pressable
+              style={{}}
+              onPress={() => _onhandleenter()}>
+              <Text style={{fontSize:18,color:'#1F4EA9',}}> Submit </Text>
+            </Pressable>
+            
+          </View>
+          </BlurView>
+        </View>
+        
+
+      </Modal>
+        
     <View style={{marginTop:30,width:(windowWidth*90)/100}}/>
 
     <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:'black',marginLeft:-5}}> Enter Book Detail</Text>
@@ -215,7 +277,34 @@ const styles = StyleSheet.create({
   screen:{
     flex:1,
     paddingHorizontal:10,
-    backgroundColor:"white"
+    backgroundColor:"white",
+   
+  },
+  modalview:{
+    flex:1,
+    paddingHorizontal:10,
+    justifyContent:'center',
+    
+
+  },
+  modalbox:{
+    // margin: 15,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+    alignItems: 'center',
+    // justifyContent:'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width:(windowWidth*70)/100,
+    height:130
+    
     
   },
   box:{

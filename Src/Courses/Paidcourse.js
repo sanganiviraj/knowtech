@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { FlatList } from 'react-native-gesture-handler';
 import { windowWidth } from '../constant/extra';
 import { Image } from 'react-native-animatable';
 
-const Paidcourse = () => {
+const Paidcourse = ({navigation}) => {
     const [item,setitem] = useState([]);
 
   useEffect(() => {
@@ -47,6 +47,7 @@ const Paidcourse = () => {
     keyExtractor={item => item.id}
     renderItem={({item}) =>{
         return(
+        <TouchableOpacity onPress={() => { navigation.navigate('paidcoursepage',{pdata:item.data}) }} activeOpacity={0.8}>
         <View style={styles.box}>
             <Image style={styles.img} source={{uri : item.data.img}}/>
             <View style={{height:50,width:(windowWidth*90/100),flexDirection:'row',justifyContent:'space-between'}}>
@@ -65,6 +66,7 @@ const Paidcourse = () => {
                 </Text>            
             </View>   
         </View>
+        </TouchableOpacity>
         )
     }}
     />

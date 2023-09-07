@@ -7,13 +7,15 @@ import { Freecourses, PupularCourses, resourcesdata } from '../Array/Coursearray
 // import { Image } from 'react-native-animatable';
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch,useSelector } from 'react-redux'
-import { ADD_FAV, Delete_fav } from '../Redux/Actions'
+import { ADD_FAV, Delete_fav, Update_fav, Update_favorite } from '../Redux/Actions'
 
 
 const Mainscreen = ({navigation}) => {
   const [selectedButton,setslectebutton]=useState();
 
   const [courseitem,setcourseitem] = useState([]);
+  const [removefav,setremovefav]=useState([]);
+  const [items,setitems]=useState([]);
   const dispatch = useDispatch();
 
   const coursedata = useSelector(state => state.favreducer.favoritedata);
@@ -45,25 +47,33 @@ const Mainscreen = ({navigation}) => {
     console.log('************')
     console.log(coursedata);
     
-    if(!coursedata.includes(index)) {
-      console.log(coursedata!==index)
-      console.log(index)
-      dispatch(ADD_FAV(index))
+    if(!removefav.includes(index)) {
+   
+      removefav.push(index)
+      
     }else{
-      dispatch(Delete_fav(index))
       console.log(index)
       console.log('delete')
+      removefav.splice(index,1)
+     
     }
 
+    console.log('%%%%%%%%')
+    console.log(removefav);
+    dispatch(Update_favorite(removefav))
+
+    setitems(coursedata.map((index) =>courseitem[index]))
+
+    
   }
+    // console.log('++++++++++++++++++++++++++++++++++++');
+    // console.log(coursedata);
+    // console.log('====================================');
 
+    // const items = coursedata.map((index) =>courseitem[index])
+    // console.log(items)
   
-  console.log('++++++++++++++++++++++++++++++++++++');
-  console.log(coursedata);
-  console.log('====================================');
 
-  const items = coursedata.map((index) =>courseitem[index])
-  console.log(items)
 
   return (
     <ScrollView>
