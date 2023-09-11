@@ -19,6 +19,7 @@ import allreducer from '../Redux/Combinerreducers';
 import { Provider } from 'react-redux'
 import Freecoursepage from '../Pages/Freecoursepage';
 import PaidCoursepage from '../Pages/PaidCoursepage';
+import Favcoursepage from '../Pages/Favcoursepage';
 
 
 const stack = createStackNavigator();
@@ -106,7 +107,7 @@ const Mainnavigation = () =>{
   return(
     <NavigationContainer>
       <stack.Navigator screenOptions={{headerShown:false}}>
-        {/* <stack.Screen name='loginnavigation' component={Loginnavigation}/> */}
+        <stack.Screen name='loginnavigation' component={Loginnavigation}/>
         <stack.Screen name='mydrawer' component={Mydrawer} />
         <stack.Screen name='admin' component={Admin } options={{
               headerShown:true
@@ -119,6 +120,7 @@ const Mainnavigation = () =>{
         <stack.Screen name='resourcespage' component={Resourcepage} options={{headerShown:true}}/>
         <stack.Screen name='freecoursepage' component={Freecoursepage} options={{headerShown:true}}/>
         <stack.Screen name='paidcoursepage' component={PaidCoursepage} options={{headerShown:true}}/>
+        <stack.Screen name='favcoursepage' component={Favcoursepage} options={{headerShown:true}}/>
       </stack.Navigator>
       {/* <ScreenTracker /> */}
     </NavigationContainer>

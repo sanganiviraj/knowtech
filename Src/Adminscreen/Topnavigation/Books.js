@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View,TouchableOpacity,Image,Modal,Pressable } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity,Image,Modal,Pressable, Alert } from 'react-native'
 import React, { useState,useEffect } from 'react'
 import { windowWidth } from '../../constant/extra';
 import Icon, { Icons } from '../../constant/Icons';
-import { TextInput } from 'react-native-paper';
+import { ActivityIndicator, TextInput } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
@@ -17,6 +17,7 @@ const Books = () => {
   const [bookdetail,setbookdetail]=useState('');
   const [bookurl,setbookurl] = useState('');
   const [bookimage,setbookimage]=useState(null);
+  const [loading,setloading]=useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [pass,setpass]=useState('');
 
@@ -27,20 +28,23 @@ const Books = () => {
     setbookurl('');
     setbookname('')
     setModalVisible(true)
+
+  
   },[])
 
   var options = {
     title: 'Select Image',
     quality : 0.5,
-    // storageOptions: {
-    //   skipBackup: true,
-    //   path: 'images',
-    // },
- };
+    mediaType: 'photo',
+    storageOptions: {
+    skipBackup: true,
+    path: 'images',
+   }
+}
 
- const addimage= () => {
-  try{
-    launchImageLibrary(options, response => {
+ const addimage= async() => {
+  // try{
+    await launchImageLibrary(options, response => {
       console.log('Response = ', response);
     if (response.didCancel) {
       console.log('User cancelled image picker');
@@ -51,37 +55,44 @@ const Books = () => {
       setbookimage(response);
     }
   })
-  }catch(error){
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
-    }
+  // }catch(error){
+  //     console.log('====================================');
+  //     console.log(error);
+  //     console.log('====================================');
+  //   }
  }
 
   const uploadimage =async()=>{
-    const reference = storage().ref(bookimage.assets[0].fileName);
-    const pathToFile =  bookimage.assets[0].uri + '' ;
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    if(bookname===''||bookdesc===''||bookdetail==''||bookimage==null||bookurl==''){
+      ToastAndroid.show('Enter Valid Values !', ToastAndroid.SHORT);
+    }else{
+      setloading(true);
+      const reference = storage().ref(bookimage.assets[0].fileName);
+      const pathToFile =  bookimage.assets[0].uri + '' ;
+      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  
+      console.log(pathToFile);
+          // uploads file
+          try {
+            await reference.putFile(pathToFile);
+            console.log('Image uploaded successfully');
+      
+            const url = await reference.getDownloadURL();
+            console.log('Download URL:', url);
+            uploaditems(url)
+      
+            // Now that you have the URL, you can call uploaditems(url) here if needed.
+      
+          } catch (error) {
+            console.error('Error uploading image:', error);
+          }
+      console.log('====================================');
+      console.log('uploaditem');
+      console.log('====================================');
+  
+    }
 
-    console.log(pathToFile);
-        // uploads file
-        try {
-          await reference.putFile(pathToFile);
-          console.log('Image uploaded successfully');
     
-          const url = await reference.getDownloadURL();
-          console.log('Download URL:', url);
-          uploaditems(url)
-    
-          // Now that you have the URL, you can call uploaditems(url) here if needed.
-    
-        } catch (error) {
-          console.error('Error uploading image:', error);
-        }
-    console.log('====================================');
-    console.log('uploaditem');
-    console.log('====================================');
-
   }
 
   const uploaditems = (url) => {
@@ -99,6 +110,7 @@ const Books = () => {
     })
     .then(() => {
       console.log('User added!');
+      setloading(false);
     });
   }
 
@@ -152,7 +164,7 @@ const Books = () => {
             />
 
             <Pressable
-              style={{}}
+             
               onPress={() => _onhandleenter()}>
               <Text style={{fontSize:18,color:'#1F4EA9',}}> Submit </Text>
             </Pressable>
@@ -194,8 +206,8 @@ const Books = () => {
 
       <TextInput 
         style={{marginVertical:10,width:(windowWidth*80)/100,backgroundColor:'#E7F2FF',elevation:1}}
-        label="Course"
-        placeholder='Enter Course name'
+        label="Book"
+        placeholder='Enter Book name'
         underlineColor='#1F4EA9'
         outlineColor='#1F4EA9'
         activeOutlineColor='#1F4EA9'
@@ -259,9 +271,13 @@ const Books = () => {
     
     </View>
 
-    <TouchableOpacity activeOpacity={0.3} onPress={() => {uploadimage()}}>
+    <TouchableOpacity activeOpacity={0.3} onPress={() => {uploadimage()}} disabled={loading==true}>
       <View style={{width:(windowWidth*90)/100,alignSelf:'center',height:50,borderRadius:10,backgroundColor:"#1F4EA9",justifyContent:"center",alignItems:"center",marginVertical:15}}> 
-          <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Submit </Text>
+          { loading == false ?<Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Submit </Text>:
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Loading </Text>  
+            <ActivityIndicator color='white' size={26}/>
+          </View>}
       </View>
     </TouchableOpacity>
 

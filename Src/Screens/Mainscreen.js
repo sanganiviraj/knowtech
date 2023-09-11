@@ -107,7 +107,7 @@ const Mainscreen = ({navigation}) => {
 
         <View style={styles.container}>
 
-            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ECC2C2',borderRadius:10}}>
+            <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ECC2C2',borderRadius:10}} onPress={()=>{navigation.navigate('favcoursepage')}}>
             <View style={styles.catelog}>
                 <View style={[styles.minibox,{backgroundColor: '#ECC2C2'}]}>
                   <Icon type={Icons.FontAwesome5} name='fire' size={30} color='#DA3636'/>

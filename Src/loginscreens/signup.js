@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity} from 'react-native';
 // import { TextInput } from "react-native-gesture-handler";
 import CheckBox from '@react-native-community/checkbox';
+// import auth from '@react-native-firebase/auth';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,6 +14,36 @@ const Signup = ({navigation}) => {
     const [Mobilenumber, setMobilenumber] = useState('');
     const [Pincode, setPincode] = useState('');
     const [agree, setagree] = useState(false);
+    const [isInputFocused, setInputFocused] = useState(false);
+
+    const handleFocus = () => {
+        setInputFocused(true);
+      };
+    
+      const handleBlur = () => {
+        setInputFocused(false);
+      };
+
+    const createuser =()=> {
+          auth()
+        .createUserWithEmailAndPassword(username, number)
+        .then(() => {
+          console.log('User account created & signed in!');
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
+    
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+    
+          console.error(error);
+        });
+    
+        navigation.navigate('edit')
+      }
 
     return(
         <View style={styles.screen}> 
@@ -30,14 +61,16 @@ const Signup = ({navigation}) => {
 
             <Text style={{fontSize:18,color:'#8AC0FF',marginTop:50,alignSelf:'center',fontFamily:'Nunito-Bold'}}> Create Account </Text>
 
-            <View style={styles.username}>
-                <Icon type={Icons.FontAwesome} name='user' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
+            <View style={styles.username} >
+                <Icon type={Icons.FontAwesome} name='user' size={25} color={isInputFocused ? 'grey' : ''} style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
                 <TextInput 
                     autoCapitalize="none"
                     autoCorrect={false}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     value={Username}
                     onChangeText={data => setUsername(data)}
-                    placeholder="Username"
+                    placeholder="Email"
                     placeholderTextColor="grey"
                     color='black'
                     style={styles.sameinput}
@@ -97,7 +130,7 @@ const Signup = ({navigation}) => {
         <TouchableOpacity style={[styles.signup,{backgroundColor : agree ? '#67ADFF' : 'grey'}]}
          disabled={!agree}
          onPress={() => {navigation.replace('mydrawer')}} >
-                    <Text style={{fontSize:18,color:'white',fontWeight:600,alignSelf:'center',}}> Sign Up</Text>
+                    <Text style={{fontSize:18,color:'white',fontWeight:600,alignSelf:'center',}}> Sign Up </Text>
         </TouchableOpacity>
 
         <Text style={{fontSize:18,fontFamily:'Nunito-Bold',color:'grey',marginTop:50,alignSelf:'center'}}> Already have an account ? </Text>

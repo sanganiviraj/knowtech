@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image,TouchableOpacity,ScrollView } from 'react-native'
+import { StyleSheet, Text, View,Image,TouchableOpacity,ScrollView,ToastAndroid } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { TextInput } from 'react-native-paper'
 import { windowWidth } from '../../constant/extra'
@@ -23,10 +23,10 @@ const Courses = () => {
   const[price,setprice]=useState(0);
   const[urllink,seturllink]=useState('');
   const[time,settime]=useState('');
+  const[loading,setloading]=useState(false);
 
   
   useEffect(()=>{
-    setcoursename('')
     setcoursename('')
     setdetail('')
     setchecked('Paid')
@@ -35,6 +35,8 @@ const Courses = () => {
     settime('')
     seturllink('')
   },[])
+
+  
 
 
   var options = {
@@ -113,8 +115,11 @@ const Courses = () => {
   // }
 
   const uploadimage =async()=>{
-
-    const reference = storage().ref(courseimage.assets[0].fileName);
+    if(coursename===''||detail===''||courseimage===null||time===''||urllink===''){
+      ToastAndroid.show('Enter Valid Values !', ToastAndroid.SHORT);
+    }else{
+      setloading(true)
+      const reference = storage().ref(courseimage.assets[0].fileName);
     const pathToFile =  courseimage.assets[0].uri + '' ;
     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
  
@@ -136,6 +141,8 @@ const Courses = () => {
     console.log('====================================');
     console.log('uploaditem');
     console.log('====================================');
+    }
+    
 
   }
 
@@ -157,6 +164,7 @@ const Courses = () => {
     })
     .then(() => {
       console.log('User added!');
+      setloading(false)
     });
   }
 
@@ -259,9 +267,7 @@ const Courses = () => {
     
     </View>
 
-    
-
-
+  
     {courseimage==null ?<View style={styles.box}>
         <Icon type={Icons.AntDesign} name="camera" size={30} color="black" style={{alignSelf:'center'}}/>
     </View> :
@@ -345,11 +351,15 @@ const Courses = () => {
       
       }    
 
-      <TouchableOpacity activeOpacity={0.3} onPress={() => {uploadimage()}}>
-      <View style={{width:(windowWidth*90)/100,alignSelf:'center',height:50,borderRadius:10,backgroundColor:"#1F4EA9",justifyContent:"center",alignItems:"center",marginVertical:20}}> 
-          <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Submit </Text>
+    <TouchableOpacity activeOpacity={0.3} onPress={() => {uploadimage()}} disabled={loading==true}>
+      <View style={{width:(windowWidth*90)/100,alignSelf:'center',height:50,borderRadius:10,backgroundColor:"#1F4EA9",justifyContent:"center",alignItems:"center",marginVertical:15}}> 
+          { loading == false ?<Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Submit </Text>:
+          <View style={{flexDirection:'row'}}>
+            <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Loading </Text>  
+            <ActivityIndicator color='white' size={26}/>
+          </View>}
       </View>
-      </TouchableOpacity>
+    </TouchableOpacity>
 
       </View>    
    
