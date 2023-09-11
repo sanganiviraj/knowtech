@@ -1,56 +1,57 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import firestore from '@react-native-firebase/firestore';
-import { windowWidth } from '../constant/extra';
-import { FlatList } from 'react-native-gesture-handler';
-import { Image } from 'react-native-animatable';
+import {windowWidth} from '../constant/extra';
+import {FlatList} from 'react-native-gesture-handler';
+import {Image} from 'react-native-animatable';
 
-const Freecourse = ({navigation}) => {
+const Freecourse = () => {
   const [item,setitem] = useState([]);
 
   useEffect(() => {
-    getitem()
-  },[])
+    getitem();
+  }, []);
 
   const getitem = () => {
     firestore()
-    .collection('Courses')
-    .get()
-    .then(querySnapshot => {
-      console.log('Total users: ', querySnapshot.size);
-      let tempdata = [];
+      .collection('Courses')
+      .get()
+      .then(querySnapshot => {
+        console.log('Total users: ', querySnapshot.size);
+        let tempdata = [];
 
-      querySnapshot.forEach(documentSnapshot => {
-        console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+        querySnapshot.forEach(documentSnapshot => {
+          console.log(
+            'User ID: ',
+            documentSnapshot.id,
+            documentSnapshot.data(),
+          );
 
-        tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+          tempdata.push({
+            id: documentSnapshot.id,
+            data: documentSnapshot.data(),
+          });
+        });
+        setitem(tempdata);
       });
-      setitem(tempdata)
-  });
-}
-
+  };
 
   console.log('====================================');
   console.log(item);
   console.log('====================================');
 
-
   const freeProducts = item.filter(item => item.data.Prc === 0);
-  console.log("+++++++++++++++++++++++++++++++++")
-  console.log(freeProducts)
-
+  console.log('+++++++++++++++++++++++++++++++++');
+  console.log(freeProducts);
 
   return (
     <View style={styles.screen}>
-      
-        <FlatList 
+      <FlatList
         data={freeProducts}
         keyExtractor={key => item.keys}
         renderItem={({item}) => {
           console.log(item.data.img)
           return(
-            <TouchableOpacity activeOpacity={0.8} onPress={() => 
-            {navigation.navigate('freecoursepage',{fdata : item.data})}}>
           <View style={styles.box} key={item.id}>
             <Image 
             style={styles.img}
@@ -62,13 +63,25 @@ const Freecourse = ({navigation}) => {
                 {item.data.name}
               </Text>
 
-              <Text numberOfLines={2} style={{fontSize:16,fontFamily:"Roboto-Medium",color:'#274971',}}>
-                {item.data.desc}
-              </Text>
+                  <Text
+                    numberOfLines={2}
+                    style={{
+                      fontSize: 16,
+                      fontFamily: 'Roboto-Medium',
+                      color: '#274971',
+                    }}>
+                    {item.data.desc}
+                  </Text>
 
-              <Text numberOfLines={2} style={{fontSize:11,fontFamily:"Roboto-Medium",color:'#274971',}}>
-                {item.data.det}
-              </Text>
+                  <Text
+                    numberOfLines={2}
+                    style={{
+                      fontSize: 11,
+                      fontFamily: 'Roboto-Medium',
+                      color: '#274971',
+                    }}>
+                    {item.data.det}
+                  </Text>
 
               
               <Text style={{fontSize:12,fontFamily:"Roboto-Medium",color:'grey',alignSelf:'flex-end'}}>
@@ -82,38 +95,36 @@ const Freecourse = ({navigation}) => {
             </View>
 
           </View>
-          </TouchableOpacity>
+
           )
         }}
-        />
-      
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  screen:{
-    flex:1,
-    
+  screen: {
+    flex: 1,
   },
-  box:{
-    width:(windowWidth*90)/100,
-    backgroundColor:'white',
-    flexDirection:'row',
-    height:150,
-    borderRadius:10,
-    marginVertical:10,
-    marginHorizontal:20,
-    alignSelf:'centers',
-    elevation:5
+  box: {
+    width: (windowWidth * 90) / 100,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    height: 150,
+    borderRadius: 10,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    alignSelf: 'centers',
+    elevation: 5,
   },
-  img:{
-    width:100,
-    height:140,
-    alignSelf:'center',
-    marginLeft:10,
-    borderRadius:10
-  }
-})
+  img: {
+    width: 100,
+    height: 140,
+    alignSelf: 'center',
+    marginLeft: 10,
+    borderRadius: 10,
+  },
+});
 
-export default Freecourse
+export default Freecourse;
