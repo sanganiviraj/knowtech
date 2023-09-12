@@ -1,14 +1,10 @@
-import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity,Image,FlatList } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { windowWidth } from '../constant/extra'
 import Icon, { Icons } from '../constant/Icons'
-import { FlatList, ScrollView } from 'react-native-gesture-handler'
-import { Freecourses, PupularCourses, resourcesdata } from '../Array/Coursearray'
-// import { Image } from 'react-native-animatable';
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch,useSelector } from 'react-redux'
-import { ADD_FAV, Delete_fav, Update_fav, Update_favorite } from '../Redux/Actions'
-import { ActivityIndicator } from 'react-native-paper'
+
 
 
 const Mainscreen = ({navigation}) => {
@@ -19,13 +15,11 @@ const Mainscreen = ({navigation}) => {
   const [items,setitems]=useState([]);
   const [loading,setloading]=useState(false);
   const dispatch = useDispatch();
-
-  const coursedata = useSelector(state => state.favreducer.favoritedata);
   
 
   useEffect(() => {
     getitem()
-    getbookitem()
+    // getbookitem()
   },[])
 
   const getitem = () => {
@@ -45,65 +39,49 @@ const Mainscreen = ({navigation}) => {
   });
 }
 
-const getbookitem = () => {
-  setloading(true)
-  firestore()
-  .collection('Books')
-  .get()
-  .then(querySnapshot => {
-    console.log('Total users: ', querySnapshot.size);
-    let tempdata = [];
+// const getbookitem = () => {
+//   setloading(true)
+//   firestore()
+//   .collection('Books')
+//   .get()
+//   .then(querySnapshot => {
+//     console.log('Total users: ', querySnapshot.size);
+//     let tempdata = [];
 
-    querySnapshot.forEach(documentSnapshot => {
-      // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+//     querySnapshot.forEach(documentSnapshot => {
+//       // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
 
-      tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
-    });
+//       tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+//     });
     
-    setbookitem(tempdata)
-    setloading(false)
-});
-}
+//     setbookitem(tempdata)
+//     setloading(false)
+// });
+// }
 
-
-  const Additem = (index) =>{
+  const Additem = (item) =>{
     console.log('************')
-    console.log(coursedata);
-    
-    if(!removefav.includes(index)) {
-   
-      removefav.push(index)
-      
-    }else{
-      console.log(index)
-      console.log('delete')
-      removefav.splice(index,1)
-     
-    }
-
-    console.log('%%%%%%%%')
-    console.log(removefav);
-    dispatch(Update_favorite(removefav))
-
-    setitems(coursedata.map((index) =>courseitem[index]))
-
-    
+    var cData = items;
+    cData.push(item)
+    console.log('1',cData)
+    setitems(cData)
+    console.log('2',items)
   }
-    // console.log('++++++++++++++++++++++++++++++++++++');
-    // console.log(coursedata);
-    // console.log('====================================');
 
-    // const items = coursedata.map((index) =>courseitem[index])
-    // console.log(items)
+  // const removeItem = (index) =>{
+  //   console.log('************')
+  //   var cData = items;
+  //   cData.splice(index,1)
+  //   setitems(cData)
+  // }
 
+  console.log('coursedata',items)
 
-
-    // console.log("Bookitem ",booitem);
   return (
-    <ScrollView>
+    // <ScrollView>
     <View style={styles.screen}>
-      <View style={styles.box}>
-        {/* <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text> */}
+      {/* <View style={styles.box}>
+        <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text>
 
         <View style={styles.container}>
             <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ADD1FA',borderRadius:10}} 
@@ -153,60 +131,60 @@ const getbookitem = () => {
             </TouchableOpacity>
            
         </View>
-      </View>
+      </View> */}
 
-      <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+      {/* <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
           <Text style={{fontSize:24,fontWeight:'500',color:"black",fontFamily:'Nunito-Bold'}}> Popular Courses </Text>
  
         </View>
-      </View>
+      </View> */}
 
         <View style={{height:260}}>
 
-        <FlatList 
-        data={courseitem.slice(0,6)}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({item,index})=>{
-          // console.log(item);
-          return(
-            <TouchableOpacity onPress={() => {}} activeOpacity={0.8}>
-            <View style={styles.pack}>
-             
-                <Image style={styles.packimg} source={{uri:item.data.img}}/>
-                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
-                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
-                
-                
-                
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
-                { 
-                  item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
-                    <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
-                }
+          <FlatList 
+          data={courseitem}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item,index})=>{
+            
+            return(
+              <TouchableOpacity onPress={() => {}} activeOpacity={0.8}>
+              <View style={styles.pack}>
+              
+                  <Image style={styles.packimg} source={{uri:item.data.img}}/>
+                  <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
+                  <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
+                  
+                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
+                  { 
+                    item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+                      <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
+                  }
 
-                <TouchableOpacity onPress={() => Additem(index)}>
-                <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
-                </TouchableOpacity>
-                
-                </View>
+                  <TouchableOpacity onPress={() => Additem(item)}>
+                  <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+                  </TouchableOpacity>
+                  
+                  </View>
 
-            </View> 
-            </TouchableOpacity>
-          )
-        }}
-        />
+              </View> 
+              </TouchableOpacity>
+            )
+          }}
+          />
         </View>
 
       
 
-        <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+        {/* <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
             <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Books </Text>
           </View>
-        </View>
+        </View> */}
 
+
+      {/* 
         {loading==true ? <FlatList 
           data={bookitem.slice(0,5)}
           horizontal
@@ -222,7 +200,7 @@ const getbookitem = () => {
             </TouchableOpacity>
             )
           }}
-          /> : <ActivityIndicator></ActivityIndicator>}
+          /> : <ActivityIndicator></ActivityIndicator>} */}
 
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
@@ -231,44 +209,43 @@ const getbookitem = () => {
       </View>
       
      <View style={{height:260}}>
-
        <FlatList 
-        data={items.slice(0,8)}
+        data={items}
         horizontal
         renderItem={({item,index})=>{
-          // console.log(item);
-          return(
-            <TouchableOpacity onPress={() => {}}>
-            <View style={styles.pack}>
-                <Image style={styles.packimg} source={{uri:item.data.img}}/>
-                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
-                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
+          console.log( 'item : ', item);
+          // return(
+          //   <TouchableOpacity onPress={() => {}}>
+          //   <View style={styles.pack}>
+          //       <Image style={styles.packimg} source={{uri:item.data.img}}/>
+          //       <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
+          //       <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
 
                 
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                { 
-                  item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
-                    <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
-                }
+          //       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          //       { 
+          //         item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+          //           <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
+          //       }
 
-                <TouchableOpacity onPress={() => Additem(index)}>
-                <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
-                </TouchableOpacity>
-                </View>
+          //       <TouchableOpacity onPress={() => removeItem( )}>
+          //       <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+          //       </TouchableOpacity>
+          //       </View>
 
-            </View> 
-            </TouchableOpacity>
-          )
+          //   </View> 
+          //   </TouchableOpacity>
+          // )
         }}
         />
         </View> 
         
         
 
-        <View style={{height:100}}/>
+        {/* <View style={{height:100}}/> */}
 
     </View>
-    </ScrollView>
+    // </ScrollView>
 
     
   )

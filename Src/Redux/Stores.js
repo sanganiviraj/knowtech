@@ -12,7 +12,7 @@ const favreducer = (state=initialstate,action) => {
             const {index} = action.favoritelist;
             return{
                 ...state,
-                favoritedata : [...state.favoritedata , index]
+                favoritedata : index
             }
         }
         case FavDelete_course :{
