@@ -12,7 +12,7 @@ import { ADD_FAV, Delete_fav, Update_fav, Update_favorite } from '../Redux/Actio
 
 const Mainscreen = ({navigation}) => {
   const [selectedButton,setslectebutton]=useState();
-
+  const [bookitem,setbookitem]=useState();
   const [courseitem,setcourseitem] = useState([]);
   const [removefav,setremovefav]=useState([]);
   const [items,setitems]=useState([]);
@@ -23,6 +23,7 @@ const Mainscreen = ({navigation}) => {
 
   useEffect(() => {
     getitem()
+    getbookitem()
   },[])
 
   const getitem = () => {
@@ -40,6 +41,24 @@ const Mainscreen = ({navigation}) => {
       });
       setcourseitem(tempdata)
   });
+}
+
+const getbookitem = () => {
+  firestore()
+  .collection('Books')
+  .get()
+  .then(querySnapshot => {
+    console.log('Total users: ', querySnapshot.size);
+    let tempdata = [];
+
+    querySnapshot.forEach(documentSnapshot => {
+      // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+
+      tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+    });
+    setbookitem(tempdata)
+    
+});
 }
 
 
@@ -72,9 +91,10 @@ const Mainscreen = ({navigation}) => {
 
     // const items = coursedata.map((index) =>courseitem[index])
     // console.log(items)
-  
 
 
+
+    // console.log("Bookitem ",booitem);
   return (
     <ScrollView>
     <View style={styles.screen}>
@@ -134,10 +154,7 @@ const Mainscreen = ({navigation}) => {
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
           <Text style={{fontSize:24,fontWeight:'500',color:"black",fontFamily:'Nunito-Bold'}}> Popular Courses </Text>
-
-          <TouchableOpacity activeOpacity={0.5} onPress={()=> {navigation.navigate('PopularScreen')}}>
-          <Text style={{fontSize:20,fontFamily:'Nunito-Bold',color:"grey"}}> See all </Text>
-          </TouchableOpacity>
+ 
         </View>
       </View>
 
@@ -146,6 +163,7 @@ const Mainscreen = ({navigation}) => {
         <FlatList 
         data={courseitem.slice(0,8)}
         horizontal
+        showsHorizontalScrollIndicator={false}
         renderItem={({item,index})=>{
           // console.log(item);
           return(
@@ -172,6 +190,32 @@ const Mainscreen = ({navigation}) => {
         }}
         />
         </View>
+
+      
+
+        <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
+            <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Books </Text>
+          </View>
+        </View>
+
+        <FlatList 
+          data={bookitem}
+          horizontal
+
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item}) =>{
+            return(
+            <TouchableOpacity onPress={() => {navigation.navigate('bookpage',{bdata : item})}}>
+              <Image 
+              style={{height:200,width:140,borderRadius:2,marginHorizontal:10,marginVertical:10}}
+              resizeMode='contain'
+              source={{uri : item.data.img}}
+              />
+            </TouchableOpacity>
+            )
+          }}
+          />
 
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
@@ -210,12 +254,8 @@ const Mainscreen = ({navigation}) => {
         }}
         />
         </View> 
-
-        <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
-          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
-            <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Books </Text>
-          </View>
-        </View>
+        
+        
 
         <View style={{height:100}}/>
 

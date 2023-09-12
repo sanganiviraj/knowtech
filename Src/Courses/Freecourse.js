@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import firestore from '@react-native-firebase/firestore';
 import {windowWidth} from '../constant/extra';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import {Image} from 'react-native-animatable';
 
-const Freecourse = () => {
+const Freecourse = ({navigation}) => {
   const [item,setitem] = useState([]);
 
   useEffect(() => {
@@ -52,6 +52,7 @@ const Freecourse = () => {
         renderItem={({item}) => {
           console.log(item.data.img)
           return(
+            <TouchableOpacity onPress={() => {navigation.navigate('freecoursepage',{fdata : item})}}>
           <View style={styles.box} key={item.id}>
             <Image 
             style={styles.img}
@@ -95,6 +96,7 @@ const Freecourse = () => {
             </View>
 
           </View>
+          </TouchableOpacity>
 
           )
         }}

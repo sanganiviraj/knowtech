@@ -20,6 +20,7 @@ import { Provider } from 'react-redux'
 import Freecoursepage from '../Pages/Freecoursepage';
 import PaidCoursepage from '../Pages/PaidCoursepage';
 import Favcoursepage from '../Pages/Favcoursepage';
+import Bookpage from '../Pages/Bookpage';
 
 
 const stack = createStackNavigator();
@@ -118,6 +119,10 @@ const Mainnavigation = () =>{
         <stack.Screen name='resources' component={Resources} options={{headerShown:true}}/>
 
         <stack.Screen name='resourcespage' component={Resourcepage} options={{headerShown:true}}/>
+        <stack.Screen name='bookpage' component={Bookpage} options={{headerShown:true}}/>
+        <stack.Screen name='paidcoursepage' component={PaidCoursepage} options={{headerShown:true}}/>
+        <stack.Screen name='freecoursepage' component={Freecoursepage} options={{headerShown:true}}/>
+
       </stack.Navigator>
       {/* <ScreenTracker /> */}
     </NavigationContainer>

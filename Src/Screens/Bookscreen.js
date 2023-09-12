@@ -1,33 +1,67 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState ,useEffect} from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import { Bookarray } from '../Array/Bookarray'
 import { windowWidth } from '../constant/extra'
 import { Image } from 'react-native-animatable'
+import firestore from '@react-native-firebase/firestore';
 
-const Bookscreen = () => {
+
+const Bookscreen = ({navigation}) => {
+  const [bookitem,setbookitem]=useState();
+  const [loading,setloading]= useState(true);
+
+  useEffect(() => {
+    getitem()
+  },[])
+
+  const getitem = () => {
+    setloading(false)
+    firestore()
+    .collection('Books')
+    .get()
+    .then(querySnapshot => {
+      console.log('Total users: ', querySnapshot.size);
+      let tempdata = [];
+
+      querySnapshot.forEach(documentSnapshot => {
+        // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+
+        tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+      });
+      setbookitem(tempdata)
+      setloading(true);
+  });
+  }
+
+  console.log("bookitem :",bookitem);
 
   return (
     <View style={styles.screen}>
-        <FlatList 
-        data={Bookarray}
+        {loading == true ? <FlatList 
+        data={bookitem}
         numColumns={2}
+        onEndReached={()=>{<View style={{height:50}}/>}}
         renderItem={({item}) =>{
+          console.log("item : ",item);
           return(
+            <TouchableOpacity activeOpacity={0.7} onPress={() => {navigation.navigate('bookpage',{bdata : item})}}>
            <View style={styles.box}>
            
               <View style={styles.minibox}>
-              <Text style={{fontSize:17,fontFamily:"Roboto-Bold",textAlign:'center',color:'black',marginBottom:5}}> {item.name}</Text>
+              <Text style={{fontSize:17,fontFamily:"Roboto-Bold",textAlign:'center',color:'black',marginBottom:5,}}> {item.data.name}</Text>
               </View> 
            
-              <Image style={styles.img} source={{uri: item.url}}/>
+              <Image style={styles.img} source={{uri: item.data.img}} resizeMode='contain'/>
         
               
            </View> 
-            
+           </TouchableOpacity>
           )
         }}
-        />
+        /> : <></>}
+        
+        
     </View>
   )
 }
@@ -61,10 +95,11 @@ const styles = StyleSheet.create({
   },
   img:{
     width:(windowWidth*33)/100,
-    height:190,
+    height:180,
     position:'absolute',
     alignSelf:'center',
     borderRadius:5,
+    
     
     
   },
