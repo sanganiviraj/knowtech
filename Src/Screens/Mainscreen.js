@@ -8,14 +8,16 @@ import { Freecourses, PupularCourses, resourcesdata } from '../Array/Coursearray
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch,useSelector } from 'react-redux'
 import { ADD_FAV, Delete_fav, Update_fav, Update_favorite } from '../Redux/Actions'
+import { ActivityIndicator } from 'react-native-paper'
 
 
 const Mainscreen = ({navigation}) => {
   const [selectedButton,setslectebutton]=useState();
-  const [bookitem,setbookitem]=useState();
+  const [bookitem,setbookitem]=useState([]);
   const [courseitem,setcourseitem] = useState([]);
   const [removefav,setremovefav]=useState([]);
   const [items,setitems]=useState([]);
+  const [loading,setloading]=useState(false);
   const dispatch = useDispatch();
 
   const coursedata = useSelector(state => state.favreducer.favoritedata);
@@ -44,6 +46,7 @@ const Mainscreen = ({navigation}) => {
 }
 
 const getbookitem = () => {
+  setloading(true)
   firestore()
   .collection('Books')
   .get()
@@ -56,8 +59,9 @@ const getbookitem = () => {
 
       tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
     });
-    setbookitem(tempdata)
     
+    setbookitem(tempdata)
+    setloading(false)
 });
 }
 
@@ -161,19 +165,22 @@ const getbookitem = () => {
         <View style={{height:260}}>
 
         <FlatList 
-        data={courseitem.slice(0,8)}
+        data={courseitem.slice(0,6)}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({item,index})=>{
           // console.log(item);
           return(
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => {}} activeOpacity={0.8}>
             <View style={styles.pack}>
+             
                 <Image style={styles.packimg} source={{uri:item.data.img}}/>
                 <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
                 <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
-
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                
+                
+                
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
                 { 
                   item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
                     <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
@@ -182,6 +189,7 @@ const getbookitem = () => {
                 <TouchableOpacity onPress={() => Additem(index)}>
                 <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
                 </TouchableOpacity>
+                
                 </View>
 
             </View> 
@@ -199,10 +207,9 @@ const getbookitem = () => {
           </View>
         </View>
 
-        <FlatList 
-          data={bookitem}
+        {loading==true ? <FlatList 
+          data={bookitem.slice(0,5)}
           horizontal
-
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) =>{
             return(
@@ -215,7 +222,7 @@ const getbookitem = () => {
             </TouchableOpacity>
             )
           }}
-          />
+          /> : <ActivityIndicator></ActivityIndicator>}
 
       <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
@@ -237,6 +244,7 @@ const getbookitem = () => {
                 <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
                 <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
 
+                
                 <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                 { 
                   item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :

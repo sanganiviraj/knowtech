@@ -52,8 +52,8 @@ const Freecourse = ({navigation}) => {
         renderItem={({item}) => {
           console.log(item.data.img)
           return(
-            <TouchableOpacity onPress={() => {navigation.navigate('freecoursepage',{fdata : item})}}>
-          <View style={styles.box} key={item.id}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => {navigation.navigate('freecoursepage',{fdata : item})}}>
+              <View style={styles.box} key={item.id}>
             <Image 
             style={styles.img}
             source={{uri:item.data.img}}
@@ -95,7 +95,8 @@ const Freecourse = ({navigation}) => {
 
             </View>
 
-          </View>
+              </View>
+                    
           </TouchableOpacity>
 
           )

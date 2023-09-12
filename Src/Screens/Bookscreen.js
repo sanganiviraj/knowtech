@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState ,useEffect} from 'react'
+import { StyleSheet, Text, TouchableOpacity, View,RefreshControl } from 'react-native'
+import React, { useState ,useEffect,useCallback} from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import { Bookarray } from '../Array/Bookarray'
 import { windowWidth } from '../constant/extra'
@@ -10,6 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 const Bookscreen = ({navigation}) => {
   const [bookitem,setbookitem]=useState();
   const [loading,setloading]= useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     getitem()
@@ -31,16 +32,23 @@ const Bookscreen = ({navigation}) => {
       });
       setbookitem(tempdata)
       setloading(true);
+      setRefreshing(false);
   });
   }
 
   console.log("bookitem :",bookitem);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    getitem()
+  }, [refreshing]);
 
   return (
     <View style={styles.screen}>
         {loading == true ? <FlatList 
         data={bookitem}
         numColumns={2}
+        refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         onEndReached={()=>{<View style={{height:50}}/>}}
         renderItem={({item}) =>{
           console.log("item : ",item);
