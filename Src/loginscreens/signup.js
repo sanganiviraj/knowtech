@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity} from 'react-native';
+import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity,ToastAndroid} from 'react-native';
 // import { TextInput } from "react-native-gesture-handler";
 import CheckBox from '@react-native-community/checkbox';
 import auth from '@react-native-firebase/auth';
@@ -86,6 +86,7 @@ const Signup = ({navigation}) => {
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             console.log('That email address is already in use!');
+            ToastAndroid.show('That email address is already in use !', ToastAndroid.SHORT);
           }
     
           if (error.code === 'auth/invalid-email') {
@@ -95,7 +96,7 @@ const Signup = ({navigation}) => {
           console.error(error);
         });
         }
-        // navigation.replace('mydrawer')
+        navigation.replace('login')
       }
 
     return(
