@@ -2,19 +2,23 @@ import React,{useState} from "react";
 import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity} from 'react-native';
 // import { TextInput } from "react-native-gesture-handler";
 import CheckBox from '@react-native-community/checkbox';
-// import auth from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import Icon , {Icons} from '../constant/Icons';
 
 const Signup = ({navigation}) => {
-    const [Username, setUsername] = useState('');
+    const [email, setemail] = useState('');
     const [Password, setPasssword] = useState('');
     const [Mobilenumber, setMobilenumber] = useState('');
     const [Pincode, setPincode] = useState('');
     const [agree, setagree] = useState(false);
     const [isInputFocused, setInputFocused] = useState(false);
+    const [emailError, setEmailError] = useState('');
+    const [mobileError, setMobileError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [PincodeError,setPincodeError]=useState('');
 
     const handleFocus = () => {
         setInputFocused(true);
@@ -24,9 +28,58 @@ const Signup = ({navigation}) => {
         setInputFocused(false);
       };
 
+      const validateEmail = () => {
+        // Regular expression for a valid email format
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    
+        if (!emailPattern.test(email)) {
+          setEmailError('Enter a valid email address');
+          return false;
+        }
+    
+        setEmailError('');
+        return true;
+      };
+
+      const validateMobile = () => {
+        const mobilePattern = /^\d{10}$/;
+    
+        if (!mobilePattern.test(Mobilenumber)) {
+          setMobileError('Enter a 10-digit mobile number');
+          return false;
+        }
+    
+        setMobileError('');
+        return true;
+      };
+
+      const validatePassword = () => {
+        if (Password.length < 8) {
+          setPasswordError('Password must be at least 8 characters long');
+          return false;
+        }
+    
+        setPasswordError('');
+        return true;
+      };
+
+      const validatepincode = () => {
+        if (Pincode.length > 6) {
+          PincodeError('Password must be at least 8 characters long');
+          return false;
+        }
+    
+        setPincodeError('');
+        return true;
+      };
+
+
     const createuser =()=> {
+        if(!validateEmail() || !validateMobile() || !validatePassword() || !validatepincode()){
+            return
+        }else{
           auth()
-        .createUserWithEmailAndPassword(username, number)
+        .createUserWithEmailAndPassword(email, Password , Mobilenumber , Pincode)
         .then(() => {
           console.log('User account created & signed in!');
         })
@@ -41,8 +94,8 @@ const Signup = ({navigation}) => {
     
           console.error(error);
         });
-    
-        navigation.navigate('edit')
+        }
+        // navigation.replace('mydrawer')
       }
 
     return(
@@ -68,14 +121,15 @@ const Signup = ({navigation}) => {
                     autoCorrect={false}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
-                    value={Username}
-                    onChangeText={data => setUsername(data)}
+                    value={email}
+                    onChangeText={data => setemail(data)}
                     placeholder="Email"
                     placeholderTextColor="grey"
                     color='black'
                     style={styles.sameinput}
                     />
             </View>
+            { emailError !== '' && <Text style={{color:"red",marginLeft:30}}> {emailError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.AntDesign} name='eye' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -90,6 +144,7 @@ const Signup = ({navigation}) => {
                     color='black'
                     style={styles.sameinput}/>
             </View>
+            { passwordError !== '' && <Text style={{color:"red",marginLeft:30}}> {passwordError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.Ionicons} name='call-sharp' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -97,12 +152,14 @@ const Signup = ({navigation}) => {
                     autoCapitalize="none"
                     autoCorrect={false}
                     value={Mobilenumber}
+                    maxLength={10}
                     onChangeText={data => setMobilenumber(data)}
                     placeholder="Mobile Number"
                     placeholderTextColor="grey"
                     color='black'
                     style={styles.sameinput}/>
             </View>
+            { mobileError !== '' && <Text style={{color:"red",marginLeft:30}}> {mobileError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.Ionicons} name='location' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -110,6 +167,7 @@ const Signup = ({navigation}) => {
                     autoCapitalize="none"
                     autoCorrect={false}
                     value={Pincode}
+                    maxLength={6}
                     onChangeText={data => setPincode(data)}
                     placeholder="Pincode"
                     placeholderTextColor="grey"
@@ -117,6 +175,7 @@ const Signup = ({navigation}) => {
                     style={styles.sameinput}
                     />
             </View>
+            { PincodeError !== '' && <Text style={{color:"red",marginLeft:30}}> {PincodeError}  </Text>}
 
             <View style={styles.line}>
                 <CheckBox 
@@ -129,7 +188,7 @@ const Signup = ({navigation}) => {
 
         <TouchableOpacity style={[styles.signup,{backgroundColor : agree ? '#67ADFF' : 'grey'}]}
          disabled={!agree}
-         onPress={() => {navigation.replace('mydrawer')}} >
+         onPress={() => {createuser()}} >
                     <Text style={{fontSize:18,color:'white',fontWeight:600,alignSelf:'center',}}> Sign Up </Text>
         </TouchableOpacity>
 

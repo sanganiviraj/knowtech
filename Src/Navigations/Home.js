@@ -122,6 +122,7 @@ const Mainnavigation = () =>{
         <stack.Screen name='bookpage' component={Bookpage} options={{headerShown:true}}/>
         <stack.Screen name='paidcoursepage' component={PaidCoursepage} options={{headerShown:true}}/>
         <stack.Screen name='freecoursepage' component={Freecoursepage} options={{headerShown:true}}/>
+        <stack.Screen name='favcoursepage' component={Favcoursepage} options={{headerShown:true}}/>
 
       </stack.Navigator>
       {/* <ScreenTracker /> */}

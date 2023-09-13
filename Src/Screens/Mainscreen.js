@@ -4,6 +4,7 @@ import { windowWidth } from '../constant/extra'
 import Icon, { Icons } from '../constant/Icons'
 import firestore from '@react-native-firebase/firestore';
 import { useDispatch,useSelector } from 'react-redux'
+import { ADD_FAV } from '../Redux/Actions';
 
 
 
@@ -16,6 +17,8 @@ const Mainscreen = ({navigation}) => {
   const [loading,setloading]=useState(false);
   const dispatch = useDispatch();
   
+  const coursedata = useSelector(state => state.favreducer.favoritedata);
+  console.log('coursedata : ',coursedata);
 
   useEffect(() => {
     getitem()
@@ -61,26 +64,27 @@ const Mainscreen = ({navigation}) => {
 
   const Additem = (item) =>{
     console.log('************')
-    var cData = items;
+    var cData = coursedata;
     cData.push(item)
-    console.log('1',cData)
-    setitems(cData)
-    console.log('2',items)
+    // console.log('1',cData)
+    // setitems(cData)
+
+    dispatch(ADD_FAV(cData))
   }
 
-  // const removeItem = (index) =>{
-  //   console.log('************')
-  //   var cData = items;
-  //   cData.splice(index,1)
-  //   setitems(cData)
-  // }
+  const removeItem = (index) =>{
+    console.log('************')
+    // var cData = ;
+    cData.splice(index,1)
+    dispatch(ADD_FAV(cData))
+  }
 
   console.log('coursedata',items)
 
   return (
     // <ScrollView>
     <View style={styles.screen}>
-      {/* <View style={styles.box}>
+      <View style={styles.box}>
         <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text>
 
         <View style={styles.container}>
@@ -131,14 +135,14 @@ const Mainscreen = ({navigation}) => {
             </TouchableOpacity>
            
         </View>
-      </View> */}
+      </View>
 
-      {/* <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+      <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
           <Text style={{fontSize:24,fontWeight:'500',color:"black",fontFamily:'Nunito-Bold'}}> Popular Courses </Text>
  
         </View>
-      </View> */}
+      </View>
 
         <View style={{height:260}}>
 
@@ -147,7 +151,6 @@ const Mainscreen = ({navigation}) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({item,index})=>{
-            
             return(
               <TouchableOpacity onPress={() => {}} activeOpacity={0.8}>
               <View style={styles.pack}>
@@ -158,7 +161,7 @@ const Mainscreen = ({navigation}) => {
                   
                   <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end'}}>
                   { 
-                    item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+                    item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>₹{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
                       <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
                   }
 
