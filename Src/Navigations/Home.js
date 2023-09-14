@@ -79,7 +79,8 @@ const  Mydrawer = ({route}) => {
       options={{
         drawerIcon : ({color}) => (
           <Icon type={Icons.Ionicons} name='home' size={30} color={color} />
-        )
+        ),
+        title:"Home"
       }}
       />
       <drawer.Screen name="feed" component={Feed} 
@@ -112,15 +113,15 @@ const Mainnavigation = () =>{
   return(
     <NavigationContainer>
       <stack.Navigator screenOptions={{headerShown:false}}>
-        <stack.Screen name='loginnavigation' component={Loginnavigation}/>
+        <stack.Screen name='loginnavigation' component={Loginnavigation} />
         <stack.Screen name='mydrawer' component={Mydrawer} />
         <stack.Screen name='admin' component={Admin } options={{
               headerShown:true
             }}/>
         <stack.Screen name='PopularScreen' component={Popularscreen} options={{headerShown:true}}/>
-        <stack.Screen name='freecourses' component={Freecourse} options={{headerShown:true}}/>
+        <stack.Screen name='freecourses' component={Freecourse} options={{headerShown:true}} />
         <stack.Screen name='paidCoures' component={Paidcourse} options={{headerShown:true}}/>
-        <stack.Screen name='resources' component={Resources} options={{headerShown:true}}/>
+        <stack.Screen name='resources' component={Resources} options={{headerShown:true,title:"Resources"}}/>
 
         <stack.Screen name='resourcespage' component={Resourcepage} options={{headerShown:true}}/>
         <stack.Screen name='bookpage' component={Bookpage} options={{headerShown:true}}/>

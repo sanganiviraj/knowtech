@@ -3,10 +3,11 @@ import React from 'react'
 import { windowHeight, windowWidth } from '../constant/extra'
 import { Image } from 'react-native-animatable'
 import Icon, { Icons } from '../constant/Icons'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
-const Profilescreen = () => {
+const Profilescreen = ({navigation}) => {
   return (
+    <ScrollView>
     <View style={styles.screen}>
       <ImageBackground 
         style={{width:windowWidth,height:(windowHeight*35/100),alignSelf:'center'}}
@@ -25,10 +26,12 @@ const Profilescreen = () => {
         <Text style={{fontSize:24,fontFamily:'Roboto-Bold',color:'#0C3D9A',alignSelf:'center',marginHorizontal:30}}>+91 8128800324 </Text>
       </View>
 
+      <TouchableOpacity onPress={() => {navigation.navigate('favcoursepage')}}>
       <View style={styles.box}>
         <Icon type={Icons.MaterialIcons} name="favorite" size={24} color="#853451"/>
         <Text style={{fontSize:24,fontFamily:'Roboto-Bold',color:'#853451',alignSelf:'center',marginHorizontal:80}}> Favorite </Text>
       </View>
+      </TouchableOpacity>
 
       <TouchableOpacity onPress={()=>{}} activeOpacity={0.6}>
       <View style={[styles.box,{marginTop:50}]}>
@@ -36,7 +39,12 @@ const Profilescreen = () => {
         <Text style={{fontSize:24,fontFamily:'Roboto-Bold',color:'black',alignSelf:'center',marginHorizontal:30}}> Logout </Text>
       </View>
       </TouchableOpacity>
+
+      <View style={{height:80}}/>
     </View>
+
+    
+    </ScrollView>
   )
 }
 

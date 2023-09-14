@@ -15,7 +15,7 @@ const Homelogin = ({navigation}) => {
                 Welcome To Eductology 
             </Text> 
 
-            <Image style={styles.logo} source={require('../images/Educatology.png')}/>
+            <Image style={styles.logo} source={require('../images/KnowTech.png')}/>
 
             <Text style={[styles.title,{color:'#67ADFF',marginTop:1,fontSize:18,textAlign:'center',fontFamily:'Arima-Bold'}]}>
             Let Educatology be the catalyst for your productivity journey! 

@@ -113,7 +113,7 @@ const Signup = ({navigation}) => {
         <View style={styles.screen}> 
             <View style={styles.circle} />
             
-            <Image style={styles.logo} source={require('../images/Educatology2.png')}/>
+            <Image style={styles.logo} source={require('../images/KnowTech2.png')}/>
 
             <TouchableOpacity style={{position:"absolute",right:20,marginTop:20}}
                 onPress={() => {navigation.navigate('admin')}}

@@ -56,7 +56,7 @@ const Login = (props) => {
             })
             .catch(error => {
               console.log(error);
-              ToastAndroid.show( error+"", ToastAndroid.SHORT);
+              ToastAndroid.show( " Semething Went Wrong ", ToastAndroid.SHORT);
            
               setloading(false)
             })
@@ -69,7 +69,7 @@ const Login = (props) => {
     return(
         <View style={styles.screen}> 
             <View style={styles.circle}/>
-            <Image style={styles.logo} source={require('../images/Educatology2.png')}/>
+            <Image style={styles.logo} source={require('../images/KnowTech2.png')}/>
 
             <View style={styles.username}>
                 <Icon type={Icons.FontAwesome} name='user' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>

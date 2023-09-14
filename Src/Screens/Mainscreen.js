@@ -120,7 +120,7 @@ const getbookitem = () => {
                   <Icon type={Icons.FontAwesome5} name='fire' size={30} color='#DA3636'/>
                 </View>
 
-                <Text style={[styles.title,{color:"#DA3636"}]}> Trending  </Text>
+                <Text style={[styles.title,{color:"#DA3636"}]}> Favorites  </Text>
             </View>
             </TouchableOpacity>
 
