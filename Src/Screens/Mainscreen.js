@@ -153,7 +153,7 @@ const getbookitem = () => {
           showsHorizontalScrollIndicator={false}
           renderItem={({item,index})=>{
             return(
-              <TouchableOpacity onPress={() => {}} activeOpacity={0.8}>
+              <TouchableOpacity onPress={() => {navigation.navigate('popularcoursepage',{pdata:item})}} activeOpacity={0.8}>
               <View style={styles.pack}>
               
                   <Image style={styles.packimg} source={{uri:item.data.img}}/>

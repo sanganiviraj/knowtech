@@ -39,24 +39,10 @@ const Favcoursepage = () => {
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item})=>{
+                  console.log("item :" , item.data.img);
                 return(
                     <TouchableOpacity activeOpacity={0.4} onPress={() => {}}>
-                    {/* <View style={styles.pack}>
-                        <Image style={styles.packimg} source={{uri : item.data.img}}/>
-                        <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
-                        <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
-                        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        { 
-                        item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
-                            <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
-                        }
-
-                        <TouchableOpacity onPress={() => Additem(index)}>
-                        <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
-                        </TouchableOpacity>
-                        </View>
-                    </View>    */}
-
+                    
                     <View style={styles.pack}>
                       <Image style={styles.packimg} source={{uri : item.data.img}}/>
                       <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
@@ -75,11 +61,13 @@ const Favcoursepage = () => {
                           </View>
                     </View>
                     </TouchableOpacity>
+                    
                     )
                 }}
                 />
-            </View> 
+      </View> 
     </View>
+    // <></>
   )
 }
 

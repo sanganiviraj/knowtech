@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { StyleSheet, View,Dimensions,Image, TextInput , TouchableOpacity , Text , ToastAndroid,ActivityIndicator} from 'react-native';
+import { StyleSheet, View,Dimensions,Image, TextInput , TouchableOpacity , Text , ToastAndroid,ActivityIndicator,Alert} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import auth from '@react-native-firebase/auth';
 const windowWidth = Dimensions.get('window').width;
@@ -56,7 +56,9 @@ const Login = (props) => {
             })
             .catch(error => {
               console.log(error);
-            //   ToastAndroid.show( error, ToastAndroid.SHORT);
+              ToastAndroid.show( error+"", ToastAndroid.SHORT);
+           
+              setloading(false)
             })
 
            

@@ -21,6 +21,7 @@ import Freecoursepage from '../Pages/Freecoursepage';
 import PaidCoursepage from '../Pages/PaidCoursepage';
 import Favcoursepage from '../Pages/Favcoursepage';
 import Bookpage from '../Pages/Bookpage';
+import Popularcoursepage from '../Pages/Popularcoursepage';
 
 
 const stack = createStackNavigator();
@@ -126,6 +127,7 @@ const Mainnavigation = () =>{
         <stack.Screen name='paidcoursepage' component={PaidCoursepage} options={{headerShown:true}}/>
         <stack.Screen name='freecoursepage' component={Freecoursepage} options={{headerShown:true}}/>
         <stack.Screen name='favcoursepage' component={Favcoursepage} options={{headerShown:true}}/>
+        <stack.Screen name='popularcoursepage' component={Popularcoursepage} options={{headerShown:true}}/>
 
       </stack.Navigator>
       {/* <ScreenTracker /> */}

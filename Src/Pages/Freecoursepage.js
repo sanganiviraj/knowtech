@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View,Image ,TouchableOpacity,ScrollView,Linking} from 'react-native'
+import { StyleSheet, Text, View,Image ,TouchableOpacity,ScrollView,Linking,ToastAndroid} from 'react-native'
 import React from 'react'
 // import { Image } from 'react-native-animatable';
 import { windowHeight, windowWidth } from '../constant/extra';
 import Icon, { Icons } from '../constant/Icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_FAV } from '../Redux/Actions';
 // import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -10,6 +12,26 @@ const Freecoursepage = ({route}) => {
   const {fdata}=route.params;
   console.log("fdata :" , fdata);
   console.log(fdata.data.Prc);
+  const dispatch = useDispatch()
+  const coursedata = useSelector(state => state.favreducer.favoritedata);
+
+  const Additem = (item) =>{
+
+    if(coursedata.includes(item)){
+      ToastAndroid.show( "Already Added!", ToastAndroid.SHORT);
+    }else{
+      console.log('************')
+      var cData = coursedata;
+      cData.push(item)
+      // console.log('1',cData)
+      // setitems(cData)
+
+      dispatch(ADD_FAV(cData))
+
+      ToastAndroid.show( "Added To Favorite", ToastAndroid.SHORT);
+    }
+    
+  }
 
   return (
     
@@ -33,9 +55,15 @@ const Freecoursepage = ({route}) => {
           <Text style={{fontSize:18,fontFamily:'Nunito-Regular',color:'#0C3D9A',marginVertical:10,width:(windowWidth*85)/100,textAlign:'justify'}}>{fdata.data.det} </Text> 
         </View> 
         
-        <View style={styles.minibox}>
-            <Icon type={Icons.Ionicons} name="time-outline" color="white" size={22} style={{marginRight:5}}/>
-            <Text style={{fontSize:18,fontFamily:'Roboto-SemiBold',color:'white',marginVertical:10}}>{fdata.data.tm} </Text> 
+        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginHorizontal:10}}>
+            <View style={styles.minibox}>
+              <Icon type={Icons.Ionicons} name="time-outline" color="white" size={22} style={{marginRight:5}}/>
+              <Text style={{fontSize:18,fontFamily:'Roboto-SemiBold',color:'white',marginVertical:10}}>{fdata.data.tm} </Text> 
+            </View>
+
+            <TouchableOpacity activeOpacity={0.4} onPress={() => {Additem(fdata)}}>
+              <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+            </TouchableOpacity>
         </View>
 
         <TouchableOpacity activeOpacity={0.3} onPress={() => {Linking.openURL(fdata.data.url)}}>
