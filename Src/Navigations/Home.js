@@ -60,7 +60,10 @@ const Customdrawer = (props) => {
   )
 }
 
-const  Mydrawer = () => {
+const  Mydrawer = ({route}) => {
+  const {em} = route.params;
+  const {pass} = route.params;
+  console.log("email : ",em ," & ", "pass : ",pass);
   return (
     <drawer.Navigator screenOptions={{
       drawerActiveTintColor:'#1882FF',

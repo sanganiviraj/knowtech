@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,TouchableOpacity,Image,FlatList } from 'react-native'
+import { StyleSheet, Text, View,TouchableOpacity,Image,FlatList ,ScrollView} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { windowWidth } from '../constant/extra'
 import Icon, { Icons } from '../constant/Icons'
@@ -9,6 +9,7 @@ import { ADD_FAV } from '../Redux/Actions';
 
 
 const Mainscreen = ({navigation}) => {
+
   const [selectedButton,setslectebutton]=useState();
   const [bookitem,setbookitem]=useState([]);
   const [courseitem,setcourseitem] = useState([]);
@@ -22,7 +23,7 @@ const Mainscreen = ({navigation}) => {
 
   useEffect(() => {
     getitem()
-    // getbookitem()
+    getbookitem()
   },[])
 
   const getitem = () => {
@@ -42,25 +43,25 @@ const Mainscreen = ({navigation}) => {
   });
 }
 
-// const getbookitem = () => {
-//   setloading(true)
-//   firestore()
-//   .collection('Books')
-//   .get()
-//   .then(querySnapshot => {
-//     console.log('Total users: ', querySnapshot.size);
-//     let tempdata = [];
+const getbookitem = () => {
+  setloading(true)
+  firestore()
+  .collection('Books')
+  .get()
+  .then(querySnapshot => {
+    console.log('Total users: ', querySnapshot.size);
+    let tempdata = [];
 
-//     querySnapshot.forEach(documentSnapshot => {
-//       // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+    querySnapshot.forEach(documentSnapshot => {
+      // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
 
-//       tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
-//     });
+      tempdata.push({id:documentSnapshot.id,data:documentSnapshot.data()})
+    });
     
-//     setbookitem(tempdata)
-//     setloading(false)
-// });
-// }
+    setbookitem(tempdata)
+    setloading(false)
+});
+}
 
   const Additem = (item) =>{
     console.log('************')
@@ -82,10 +83,10 @@ const Mainscreen = ({navigation}) => {
   console.log('coursedata',items)
 
   return (
-    // <ScrollView>
+    <ScrollView>
     <View style={styles.screen}>
       <View style={styles.box}>
-        <Text style={{fontSize:24,fontWeight:'500',color:"black",marginTop:10}}> Category </Text>
+    
 
         <View style={styles.container}>
             <TouchableOpacity activeOpacity={0.7} style={{backgroundColor:  '#ADD1FA',borderRadius:10}} 
@@ -147,7 +148,7 @@ const Mainscreen = ({navigation}) => {
         <View style={{height:260}}>
 
           <FlatList 
-          data={courseitem}
+          data={courseitem.slice(0,6)}
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({item,index})=>{
@@ -180,15 +181,14 @@ const Mainscreen = ({navigation}) => {
 
       
 
-        {/* <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+        <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
             <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Books </Text>
           </View>
-        </View> */}
+        </View>
 
 
-      {/* 
-        {loading==true ? <FlatList 
+       <FlatList 
           data={bookitem.slice(0,5)}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -203,52 +203,52 @@ const Mainscreen = ({navigation}) => {
             </TouchableOpacity>
             )
           }}
-          /> : <ActivityIndicator></ActivityIndicator>} */}
+          /> 
 
-      <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
+      {/* <View style={[styles.box,{backgroundColor:"white",marginBottom:-10}]}>
         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
           <Text style={{fontSize:24,fontFamily:'Nunito-Bold',color:"black"}}> Favorite Courses </Text>
         </View>
-      </View>
+      </View> */}
       
-     <View style={{height:260}}>
+     {/* <View style={{height:260}}>
        <FlatList 
         data={items}
         horizontal
         renderItem={({item,index})=>{
           console.log( 'item : ', item);
-          // return(
-          //   <TouchableOpacity onPress={() => {}}>
-          //   <View style={styles.pack}>
-          //       <Image style={styles.packimg} source={{uri:item.data.img}}/>
-          //       <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
-          //       <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
+          return(
+            <TouchableOpacity onPress={() => {}}>
+            <View style={styles.pack}>
+                <Image style={styles.packimg} source={{uri:item.data.img}}/>
+                <Text style={{fontSize:18,fontWeight:'600',color:'black',marginTop:10}}>{item.data.name} </Text>
+                <Text numberOfLines={2} style={{fontSize:14,fontWeight:'600',color:'#274971',marginTop:5}}>{item.data.desc} </Text>
 
                 
-          //       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-          //       { 
-          //         item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
-          //           <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
-          //       }
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                { 
+                  item.data.Prc !== 0 ? <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>{item.data.Prc} <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',}}>{typeof item.price === 'number' ? "₹" : ''}</Text></Text> :
+                    <Text style={{fontSize:24,fontWeight:'800',color:'#0C3D9A',marginTop:10}}>Free</Text>
+                }
 
-          //       <TouchableOpacity onPress={() => removeItem( )}>
-          //       <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
-          //       </TouchableOpacity>
-          //       </View>
+                <TouchableOpacity onPress={() => removeItem( )}>
+                <Icon type={Icons.MaterialIcons} name="favorite-outline" size={30} color="black" />
+                </TouchableOpacity>
+                </View>
 
-          //   </View> 
-          //   </TouchableOpacity>
-          // )
+            </View> 
+            </TouchableOpacity>
+          )
         }}
         />
         </View> 
-        
+         */}
         
 
-        {/* <View style={{height:100}}/> */}
+        <View style={{height:80}}/>
 
     </View>
-    // </ScrollView>
+    </ScrollView>
 
     
   )

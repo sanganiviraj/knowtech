@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity,ToastAndroid} from 'react-native';
+import { StyleSheet, View , Image , Text , TextInput , Dimensions , TouchableOpacity,ToastAndroid,ActivityIndicator} from 'react-native';
 // import { TextInput } from "react-native-gesture-handler";
 import CheckBox from '@react-native-community/checkbox';
 import auth from '@react-native-firebase/auth';
@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import Icon , {Icons} from '../constant/Icons';
+import { ScrollView } from "react-native-gesture-handler";
 
 const Signup = ({navigation}) => {
     const [email, setemail] = useState('');
@@ -15,10 +16,12 @@ const Signup = ({navigation}) => {
     const [Pincode, setPincode] = useState('');
     const [agree, setagree] = useState(false);
     const [isInputFocused, setInputFocused] = useState(false);
+    const [isInputFocuseds, setInputFocuseds] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [mobileError, setMobileError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [PincodeError,setPincodeError]=useState('');
+    const [loading,setloading] = useState(false);
 
     const handleFocus = () => {
         setInputFocused(true);
@@ -75,13 +78,17 @@ const Signup = ({navigation}) => {
 
 
     const createuser =()=> {
+      
         if(!validateEmail() || !validateMobile() || !validatePassword() || !validatepincode()){
             return
         }else{
+          setloading(true)
           auth()
         .createUserWithEmailAndPassword(email, Password , Mobilenumber , Pincode)
         .then(() => {
           console.log('User account created & signed in!');
+          setloading(false)
+          navigation.replace('login')
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
@@ -96,10 +103,13 @@ const Signup = ({navigation}) => {
           console.error(error);
         });
         }
-        navigation.replace('login')
+        
       }
 
+     
+
     return(
+      <ScrollView>
         <View style={styles.screen}> 
             <View style={styles.circle} />
             
@@ -116,7 +126,7 @@ const Signup = ({navigation}) => {
             <Text style={{fontSize:18,color:'#8AC0FF',marginTop:50,alignSelf:'center',fontFamily:'Nunito-Bold'}}> Create Account </Text>
 
             <View style={styles.username} >
-                <Icon type={Icons.FontAwesome} name='user' size={25} color={isInputFocused ? 'grey' : ''} style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
+                <Icon type={Icons.FontAwesome} name='user' size={25} color={isInputFocused ? '#67ADFF' : 'grey'} style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
                 <TextInput 
                     autoCapitalize="none"
                     autoCorrect={false}
@@ -130,22 +140,23 @@ const Signup = ({navigation}) => {
                     style={styles.sameinput}
                     />
             </View>
-            { emailError !== '' && <Text style={{color:"red",marginLeft:30}}> {emailError}  </Text>}
+            { emailError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {emailError}  </Text>}
 
             <View style={styles.username}>
-                <Icon type={Icons.AntDesign} name='eye' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
+                <Icon type={Icons.AntDesign} name='eye' size={25} color={ 'grey'} style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
                 <TextInput 
                     autoCapitalize="none"
                     autoCorrect={false}
                     value={Password}
                     secureTextEntry={true}
+                    keyboardType="numeric"
                     onChangeText={data => setPasssword(data)}
                     placeholder="Password"
                     placeholderTextColor="grey"
                     color='black'
                     style={styles.sameinput}/>
             </View>
-            { passwordError !== '' && <Text style={{color:"red",marginLeft:30}}> {passwordError}  </Text>}
+            { passwordError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {passwordError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.Ionicons} name='call-sharp' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -160,7 +171,7 @@ const Signup = ({navigation}) => {
                     color='black'
                     style={styles.sameinput}/>
             </View>
-            { mobileError !== '' && <Text style={{color:"red",marginLeft:30}}> {mobileError}  </Text>}
+            { mobileError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {mobileError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.Ionicons} name='location' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -176,7 +187,7 @@ const Signup = ({navigation}) => {
                     style={styles.sameinput}
                     />
             </View>
-            { PincodeError !== '' && <Text style={{color:"red",marginLeft:30}}> {PincodeError}  </Text>}
+            { PincodeError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {PincodeError}  </Text>}
 
             <View style={styles.line}>
                 <CheckBox 
@@ -190,7 +201,7 @@ const Signup = ({navigation}) => {
         <TouchableOpacity style={[styles.signup,{backgroundColor : agree ? '#67ADFF' : 'grey'}]}
          disabled={!agree}
          onPress={() => {createuser()}} >
-                    <Text style={{fontSize:18,color:'white',fontWeight:600,alignSelf:'center',}}> Sign Up </Text>
+                    {loading==false ? <Text style={{fontSize:18,color:'white',fontWeight:600,alignSelf:'center',}}> Sign Up </Text> : <ActivityIndicator></ActivityIndicator>}
         </TouchableOpacity>
 
         <Text style={{fontSize:18,fontFamily:'Nunito-Bold',color:'grey',marginTop:50,alignSelf:'center'}}> Already have an account ? </Text>
@@ -201,6 +212,7 @@ const Signup = ({navigation}) => {
             </TouchableOpacity>
 
         </View>
+        </ScrollView>
     )
 }
 

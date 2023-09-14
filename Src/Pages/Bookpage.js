@@ -36,7 +36,7 @@ const Bookpage = ({route}) => {
 
         <TouchableOpacity activeOpacity={0.3} onPress={() => {Linking.openURL(bdata.data.url)}}>
           <View style={{width:(windowWidth*90)/100,alignSelf:'center',height:50,borderRadius:10,backgroundColor:"#1F4EA9",justifyContent:"center",alignItems:"center",marginVertical:20}}> 
-              <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Submit </Text>
+              <Text style={{fontSize:20,color:'white',fontFamily:"Nunito-SemiBold"}}> Download Now </Text>
           </View>
         </TouchableOpacity>
 

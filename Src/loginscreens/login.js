@@ -1,16 +1,68 @@
 import React,{useState} from "react";
-import { StyleSheet, View,Dimensions,Image, TextInput , TouchableOpacity , Text} from 'react-native';
+import { StyleSheet, View,Dimensions,Image, TextInput , TouchableOpacity , Text , ToastAndroid,ActivityIndicator} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-
+import auth from '@react-native-firebase/auth';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import Icon , {Icons} from '../constant/Icons'; 
 
 const Login = (props) => {
-    const [Username, setUsername] = useState('');
+    const [email, setemail] = useState('');
     const [Password, setPasssword] = useState('');
-
+    const [emailError, setEmailError] = useState('');
     const [agree, setagree] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
+    const [loading,setloading]=useState('');
+
+    const validateEmail = () => {
+        // Regular expression for a valid email format
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    
+        if (!emailPattern.test(email)) {
+          setEmailError('Enter a valid email address');
+          return false;
+        }
+    
+        setEmailError('');
+        return true;
+      };
+
+
+      const validatePassword = () => {
+        if (Password.length < 8) {
+          setPasswordError('Password must be at least 8 characters long');
+          return false;
+        }
+    
+        setPasswordError('');
+        return true;
+      };
+
+
+      const siginuser = () => {
+        if(!validateEmail || !validatePassword){
+            return
+        }else{
+            setloading(true)
+            auth()
+            .signInWithEmailAndPassword(email,Password)
+            .then(()=>{
+            //   Alert.alert('sign in user')
+            setloading(false)
+              props.navigation.replace('mydrawer',{
+                em : email,
+                pass : Password
+              }) 
+            })
+            .catch(error => {
+              console.log(error);
+            //   ToastAndroid.show( error, ToastAndroid.SHORT);
+            })
+
+           
+        }
+        
+      }
 
     return(
         <View style={styles.screen}> 
@@ -22,9 +74,9 @@ const Login = (props) => {
                 <TextInput 
                     autoCapitalize="none"
                     autoCorrect={false}
-                    value={Username}
-                    onChangeText={data => setUsername(data)}
-                    placeholder="Username"
+                    value={email}
+                    onChangeText={data => setemail(data)}
+                    placeholder="Email"
                     placeholderTextColor="grey"
                     color='black'
                     style={{
@@ -33,6 +85,7 @@ const Login = (props) => {
                     }}
                     />
             </View>
+            { emailError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {emailError}  </Text>}
 
             <View style={styles.username}>
                 <Icon type={Icons.AntDesign} name='eye' size={25} color='grey' style={{alignSelf:'center',marginLeft:20,marginRight:5}}/>
@@ -41,6 +94,7 @@ const Login = (props) => {
                     autoCorrect={false}
                     value={Password}
                     secureTextEntry={true}
+                    keyboardType="numeric"
                     onChangeText={data => setPasssword(data)}
                     placeholder="Password"
                     placeholderTextColor="grey"
@@ -51,7 +105,8 @@ const Login = (props) => {
                     }}
                     />
             </View>
-
+            { passwordError !== '' && <Text style={{color:"red",marginLeft:30,fontSize:11}}> {passwordError}  </Text>}
+            
             <View style={styles.line}>
                 <CheckBox 
                     value={agree}
@@ -64,12 +119,9 @@ const Login = (props) => {
 
             <TouchableOpacity style={[styles.signup,{backgroundColor : agree ? '#67ADFF' : 'grey'}]}
              disabled={!agree} 
-             onPress={() => {props.navigation.replace('mydrawer',{
-                use:Username,
-                pass:Password
-             }) }} >
+             onPress={() => {siginuser()}} >
 
-                    <Text style={{fontSize:18,color:'white',fontWeight:'600',alignSelf:'center',fontFamily:'Nunito-Bold'}}> Sign In</Text>
+                    {loading==false ? <Text style={{fontSize:18,color:'white',fontWeight:'600',alignSelf:'center',fontFamily:'Nunito-Bold'}}> Sign In</Text> : <ActivityIndicator></ActivityIndicator>}
 
             </TouchableOpacity>
 
